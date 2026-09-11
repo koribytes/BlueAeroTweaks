@@ -29,6 +29,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import uk.tfindustries.blueaerotweaks.block.ModBlocks;
 import uk.tfindustries.blueaerotweaks.item.ModItems;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -47,6 +48,7 @@ public class BlueAeroTweaks {
         NeoForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -60,9 +62,14 @@ public class BlueAeroTweaks {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.TOFU);
             event.accept(ModItems.RAW_TOFU);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.TOFU_BLOCK);
         }
     }
 
