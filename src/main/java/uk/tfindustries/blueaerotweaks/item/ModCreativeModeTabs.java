@@ -23,6 +23,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.RAW_TOFU);
                         output.accept(ModBlocks.RAW_TOFU_BLOCK);
                         output.accept(ModBlocks.FRIED_TOFU_BLOCK);
+                        output.accept(ModItems.TOFU_FRYER);
                     }).build());
 
     public static void register(IEventBus eventBus) {
