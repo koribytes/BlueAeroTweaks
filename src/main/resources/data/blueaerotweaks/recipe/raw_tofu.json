@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "blueaerotweaks:raw_tofu_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "blueaerotweaks:raw_tofu"
+  }
+}

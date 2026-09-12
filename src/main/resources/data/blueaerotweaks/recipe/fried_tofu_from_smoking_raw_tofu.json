@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 75,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "blueaerotweaks:raw_tofu"
+  },
+  "result": {
+    "id": "blueaerotweaks:fried_tofu"
+  }
+}
