@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [ {
+    "bonus rolls": 0.0,
+    "conditions": [
+      {
+        "condition": "minecraft:survives_explosion"
+      }
+    ],
+    "entries": [
+      {
+        "type": "minecraft:item",
+        "name": "blueaerotweaks:fried_tofu_block"
+      }
+    ],
+    "rolls": 1.0
+  }
+  ],
+  "random_sequence": "blueaerotweaks:blocks/fried_tofu_block"
+}
