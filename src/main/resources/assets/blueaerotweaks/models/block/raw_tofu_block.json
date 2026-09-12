@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "blueaerotweaks:block/tofu_block"
+    "all": "blueaerotweaks:block/raw_tofu_block"
   }
 }

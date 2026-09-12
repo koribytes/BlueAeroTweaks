@@ -9,7 +9,7 @@ import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(BlueAeroTweaks.MODID);
 
-    public static final DeferredItem<Item> TOFU = ITEMS.register("tofu", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> FRIED_TOFU = ITEMS.register("fried_tofu", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> RAW_TOFU = ITEMS.register("raw_tofu", () -> new Item(new Item.Properties()));
 

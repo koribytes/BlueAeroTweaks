@@ -1,6 +1,9 @@
 {
-  "item.blueaerotweaks.tofu": "Tofu",
+  "item.blueaerotweaks.fried_tofu": "Tofu",
   "item.blueaerotweaks.raw_tofu": "Raw Tofu",
 
-  "block.blueaerotweaks.tofu_block": "Block of Tofu"
+  "block.blueaerotweaks.raw_tofu_block": "Block of Raw Tofu",
+  "block.blueaerotweaks.fried_tofu_block": "Block of Fried Tofu",
+
+  "creativetab.blueaerotweaks.blue_aero_tweaks_items": "Blue Aero Tweaks"
 }
