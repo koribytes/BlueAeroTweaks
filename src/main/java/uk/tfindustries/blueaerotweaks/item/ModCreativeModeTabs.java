@@ -25,6 +25,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.RAW_TOFU_BLOCK);
                         output.accept(ModBlocks.FRIED_TOFU_BLOCK);
                         output.accept(ModBlocks.AIR_FRYER_BLOCK);
+                        output.accept(ModBlocks.SQUALLSTONE_BLOCK);
                     }).build());
 
     public static void register(IEventBus eventBus) {

@@ -60,7 +60,7 @@ public class BlueAeroTweaks {
             event.accept(ModBlocks.RAW_TOFU_BLOCK);
             event.accept(ModBlocks.FRIED_TOFU_BLOCK);
             event.accept(ModBlocks.AIR_FRYER_BLOCK);
-
+            event.accept(ModBlocks.SQUALLSTONE_BLOCK);
         }
     }
 
