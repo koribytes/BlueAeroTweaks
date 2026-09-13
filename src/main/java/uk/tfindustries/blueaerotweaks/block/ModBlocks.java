@@ -9,6 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
+import uk.tfindustries.blueaerotweaks.block.custom.AirFryerBlock;
 import uk.tfindustries.blueaerotweaks.item.ModItems;
 
 import java.util.function.Supplier;
@@ -23,6 +24,11 @@ public class ModBlocks {
     public static final DeferredBlock<Block> FRIED_TOFU_BLOCK = registerBlock("fried_tofu_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(2f).sound(SoundType.WET_SPONGE)));
+
+    public static final DeferredBlock<Block> AIR_FRYER_BLOCK = registerBlock("air_fryer_block",
+            () -> new AirFryerBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));

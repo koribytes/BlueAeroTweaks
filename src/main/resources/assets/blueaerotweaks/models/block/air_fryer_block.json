@@ -1,0 +1,10 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "front": "blueaerotweaks:block/air_fryer_block_front_off",
+    "side": "blueaerotweaks:block/air_fryer_block_side",
+    "top": "blueaerotweaks:block/air_fryer_block_top",
+    "back": "blueaerotweaks:block/air_fryer_block_back",
+    "bottom": "blueaerotweaks:block/air_fryer_block_bottom"
+  }
+}

@@ -59,6 +59,8 @@ public class BlueAeroTweaks {
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.RAW_TOFU_BLOCK);
             event.accept(ModBlocks.FRIED_TOFU_BLOCK);
+            event.accept(ModBlocks.AIR_FRYER_BLOCK);
+
         }
     }
 

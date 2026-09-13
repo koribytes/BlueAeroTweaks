@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "blueaerotweaks:block/air_fryer_front",
-    "side": "blueaerotweaks:block/air_fryer_side",
-    "top": "blueaerotweaks:block/air_fryer_top"
-  }
-}

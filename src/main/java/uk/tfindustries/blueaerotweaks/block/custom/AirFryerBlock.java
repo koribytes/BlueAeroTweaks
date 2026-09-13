@@ -6,5 +6,7 @@ public class AirFryerBlock extends Block {
 
     public AirFryerBlock(Properties properties) {
         super(properties);
+
     }
+
 }
