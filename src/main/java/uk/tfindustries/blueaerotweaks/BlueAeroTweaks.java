@@ -54,6 +54,7 @@ public class BlueAeroTweaks {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.FRIED_TOFU);
             event.accept(ModItems.RAW_TOFU);
+            event.accept(ModItems.BINCHOTAN);
         }
 
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {

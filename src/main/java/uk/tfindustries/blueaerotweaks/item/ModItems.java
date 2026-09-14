@@ -16,6 +16,9 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_TOFU = ITEMS.register("raw_tofu",
             () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_TOFU)));
 
+    public static final DeferredItem<Item> BINCHOTAN = ITEMS.register("binchotan",
+            () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> TOFU_FRYER = ITEMS.register("tofu_fryer",
             () -> new TofuFryerItem(new Item.Properties()));
 
