@@ -9,5 +9,11 @@
   "block.blueaerotweaks.air_fryer_block": "Air Fryer",
   "block.blueaerotweaks.squallstone_block": "Squallstone",
 
-  "creativetab.blueaerotweaks.blue_aero_tweaks_items": "Blue Aero Tweaks"
+  "creativetab.blueaerotweaks.blue_aero_tweaks_items": "Blue Aero Tweaks",
+
+  "tooltip.blueaerotweaks.fried_tofu.tooltip": "Tofu, but Fried",
+  "tooltip.blueaerotweaks.raw_tofu.tooltip": "IT'S RAW!",
+  "tooltip.blueaerotweaks.binchotan.tooltip": "Japanese white charcoal",
+  "tooltip.blueaerotweaks.tofu_fryer.tooltip": "A Tofu Fried This Rice?",
+  "tooltip.blueaerotweaks.tofu_fryer_shift_down.tooltip": "Right click a raw tofu block c:"
 }
