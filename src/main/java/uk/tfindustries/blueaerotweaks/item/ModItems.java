@@ -5,6 +5,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
+import uk.tfindustries.blueaerotweaks.item.custom.FuelItem;
 import uk.tfindustries.blueaerotweaks.item.custom.TofuFryerItem;
 
 public class ModItems {
@@ -17,7 +18,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_TOFU)));
 
     public static final DeferredItem<Item> BINCHOTAN = ITEMS.register("binchotan",
-            () -> new Item(new Item.Properties()));
+            () -> new FuelItem(new Item.Properties(), 6400));
 
     public static final DeferredItem<Item> TOFU_FRYER = ITEMS.register("tofu_fryer",
             () -> new TofuFryerItem(new Item.Properties()));
