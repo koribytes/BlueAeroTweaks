@@ -20,8 +20,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
-import uk.tfindustries.blueaerotweaks.item.ModCreativeModeTabs;
 import uk.tfindustries.blueaerotweaks.item.ModItems;
+import uk.tfindustries.blueaerotweaks.registries.BlueCreativeTabs;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(BlueAeroTweaks.MODID)
@@ -45,7 +45,7 @@ public class BlueAeroTweaks {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
-        ModCreativeModeTabs.register(modEventBus);
+        BlueCreativeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
         BlueBlocks.register(modEventBus);
