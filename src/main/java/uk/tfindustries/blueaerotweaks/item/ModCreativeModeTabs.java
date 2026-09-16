@@ -7,7 +7,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import uk.tfindustries.blueaerotweaks.block.ModBlocks;
+import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
 
 import java.util.function.Supplier;
 
@@ -23,10 +23,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.RAW_TOFU);
                         output.accept(ModItems.BINCHOTAN);
                         output.accept(ModItems.TOFU_FRYER);
-                        output.accept(ModBlocks.RAW_TOFU_BLOCK);
-                        output.accept(ModBlocks.FRIED_TOFU_BLOCK);
-                        output.accept(ModBlocks.AIR_FRYER_BLOCK);
-                        output.accept(ModBlocks.SQUALLSTONE_BLOCK);
+                        output.accept(BlueBlocks.RAW_TOFU_BLOCK);
+                        output.accept(BlueBlocks.FRIED_TOFU_BLOCK);
+                        output.accept(BlueBlocks.AIR_FRYER_BLOCK);
+                        output.accept(BlueBlocks.SQUALLSTONE_BLOCK);
                     }).build());
 
     public static void register(IEventBus eventBus) {

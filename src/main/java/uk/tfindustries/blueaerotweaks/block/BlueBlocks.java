@@ -1,13 +1,10 @@
 package uk.tfindustries.blueaerotweaks.block;
 
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -19,7 +16,8 @@ import uk.tfindustries.blueaerotweaks.item.ModItems;
 import java.util.function.Supplier;
 
 
-public class ModBlocks {
+public class BlueBlocks {
+    /*
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BlueAeroTweaks.MODID);
 
 
@@ -53,5 +51,5 @@ public class ModBlocks {
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
-
+*/
 }

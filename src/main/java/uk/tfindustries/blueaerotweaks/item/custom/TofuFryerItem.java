@@ -1,22 +1,20 @@
 package uk.tfindustries.blueaerotweaks.item.custom;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import uk.tfindustries.blueaerotweaks.block.ModBlocks;
+import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
 
 import java.util.Map;
 
 public class TofuFryerItem extends Item {
     private static final Map<Block, Block> TOFU_FRYER_MAP =
             Map.of(
-                    ModBlocks.RAW_TOFU_BLOCK.get(), ModBlocks.FRIED_TOFU_BLOCK.get()
+                    BlueBlocks.RAW_TOFU_BLOCK.get(), BlueBlocks.FRIED_TOFU_BLOCK.get()
             );
     public TofuFryerItem(Properties properties) {
         super(properties);
