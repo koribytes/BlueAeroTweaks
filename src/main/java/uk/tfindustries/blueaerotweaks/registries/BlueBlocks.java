@@ -11,7 +11,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
 import uk.tfindustries.blueaerotweaks.block.custom.AirFryerBlock;
 import uk.tfindustries.blueaerotweaks.block.custom.SquallstoneBlock;
-import uk.tfindustries.blueaerotweaks.item.ModItems;
 
 import java.util.function.Supplier;
 
@@ -38,7 +37,7 @@ public class BlueBlocks {
 
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        BlueItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

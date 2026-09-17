@@ -19,8 +19,8 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import uk.tfindustries.blueaerotweaks.registries.BlueItems;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
-import uk.tfindustries.blueaerotweaks.item.ModItems;
 import uk.tfindustries.blueaerotweaks.registries.BlueCreativeTabs;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -40,14 +40,12 @@ public class BlueAeroTweaks {
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
+        //modEventBus.addListener(this::onRegister);
         NeoForge.EVENT_BUS.register(this);
 
-        BlueCreativeTabs.register(modEventBus);
 
-        ModItems.register(modEventBus);
+        BlueCreativeTabs.register(modEventBus);
+        BlueItems.register(modEventBus);
         BlueBlocks.register(modEventBus);
 
         // Register the item to a creative tab
@@ -64,9 +62,9 @@ public class BlueAeroTweaks {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.FRIED_TOFU);
-            event.accept(ModItems.RAW_TOFU);
-            event.accept(ModItems.BINCHOTAN);
+            event.accept(BlueItems.FRIED_TOFU);
+            event.accept(BlueItems.RAW_TOFU);
+            event.accept(BlueItems.BINCHOTAN);
         }
 
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {

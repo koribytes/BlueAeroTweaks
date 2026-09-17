@@ -1,4 +1,4 @@
-package uk.tfindustries.blueaerotweaks.item;
+package uk.tfindustries.blueaerotweaks.registries;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -14,11 +14,11 @@ import uk.tfindustries.blueaerotweaks.item.custom.TofuFryerItem;
 
 import java.util.List;
 
-public class ModItems {
+public class BlueItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(BlueAeroTweaks.MODID);
 
     public static final DeferredItem<Item> FRIED_TOFU = ITEMS.register("fried_tofu",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.FRIED_TOFU)) {
+            () -> new Item(new Item.Properties().food(BlueItemProperties.FRIED_TOFU)) {
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.translatable("tooltip.blueaerotweaks.fried_tofu.tooltip"));
@@ -27,7 +27,7 @@ public class ModItems {
             });
 
     public static final DeferredItem<Item> RAW_TOFU = ITEMS.register("raw_tofu",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_TOFU)) {
+            () -> new Item(new Item.Properties().food(BlueItemProperties.RAW_TOFU)) {
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     tooltipComponents.add(Component.translatable("tooltip.blueaerotweaks.raw_tofu.tooltip"));
