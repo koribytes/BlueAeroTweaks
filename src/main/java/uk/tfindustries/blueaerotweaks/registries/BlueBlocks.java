@@ -9,8 +9,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
-import uk.tfindustries.blueaerotweaks.block.custom.AirFryerBlock;
-import uk.tfindustries.blueaerotweaks.block.custom.SquallstoneBlock;
+import uk.tfindustries.blueaerotweaks.content.AirFryer.AirFryerBlock;
+import uk.tfindustries.blueaerotweaks.content.Squallstone.SquallstoneBlock;
 
 import java.util.function.Supplier;
 
