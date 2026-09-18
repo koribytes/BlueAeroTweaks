@@ -57,9 +57,6 @@ public class BlueAeroTweaks {
         //modEventBus.addListener(this::onRegister);
         NeoForge.EVENT_BUS.register(this);
 
-
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
         //modEventBus.addListener(EventPriority.HIGHEST, DataGenerators::gatherData);
         //yes
         modContainer.registerConfig(ModConfig.Type.SERVER, BlueConfig.getSpec());
@@ -70,29 +67,16 @@ public class BlueAeroTweaks {
     private void commonSetup(FMLCommonSetupEvent event) {
     }
 
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(BlueItems.FRIED_TOFU);
-            event.accept(BlueItems.RAW_TOFU);
-            event.accept(BlueItems.BINCHOTAN);
-        }
-
-        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(BlueBlocks.RAW_TOFU_BLOCK);
-            event.accept(BlueBlocks.FRIED_TOFU_BLOCK);
-            event.accept(BlueBlocks.AIR_FRYER_BLOCK);
-            event.accept(BlueBlocks.SQUALLSTONE_BLOCK);
-        }
-    }
-
     public static Component lang(String path, Object... args) {
         return Component.translatable(MODID + "." + path, args);
     }
 
     public static ResourceLocation path(final String path) {
         return ResourceLocation.tryBuild(MODID, path);
+    }
+
+    public static ResourceLocation asResource(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
 

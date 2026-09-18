@@ -1,8 +1,11 @@
 package uk.tfindustries.blueaerotweaks.registries;
 
+import dev.simulated_team.simulated.registrate.SimulatedRegistrate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -13,6 +16,8 @@ import java.util.function.Supplier;
 public class BlueCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BlueAeroTweaks.MODID);
 
+    private static final ResourceLocation SIMULATED_SECTION = ResourceLocation.fromNamespaceAndPath("simulated", "simulated");
+    private static boolean sectionsInitialized = false;
 
     public static final Supplier<CreativeModeTab> BLUE_AERO_TWEAKS_TAB = CREATIVE_MODE_TAB.register("blue_aero_tweaks_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(BlueItems.FRIED_TOFU.get()))
@@ -26,9 +31,19 @@ public class BlueCreativeTabs {
                         output.accept(BlueBlocks.FRIED_TOFU_BLOCK);
                         output.accept(BlueBlocks.AIR_FRYER_BLOCK);
                         output.accept(BlueBlocks.SQUALLSTONE_BLOCK);
+                        output.accept(BlueBlocks.AMMO_DEPLOYER);
                     }).build());
+
+
+
+    private static void registerSectionItem(ResourceLocation sectionId, ResourceLocation itemPath, Supplier<Item> itemSupplier) {
+        SimulatedRegistrate.TAB_ITEMS.add(itemSupplier);
+        SimulatedRegistrate.ITEM_TO_SECTION.put(itemPath, sectionId);
+    }
+
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TAB.register(eventBus);
     }
+
 }
