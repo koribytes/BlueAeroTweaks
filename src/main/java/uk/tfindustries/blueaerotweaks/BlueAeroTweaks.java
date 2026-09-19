@@ -26,6 +26,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import uk.tfindustries.blueaerotweaks.config.BlueConfig;
 import uk.tfindustries.blueaerotweaks.datagen.DataGenerators;
+import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 import uk.tfindustries.blueaerotweaks.registries.BlueItems;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
 import uk.tfindustries.blueaerotweaks.registries.BlueCreativeTabs;
@@ -51,6 +52,7 @@ public class BlueAeroTweaks {
         BlueCreativeTabs.register(modEventBus);
         BlueItems.register(modEventBus);
         BlueBlocks.register(modEventBus);
+        BlueBlockEntityTypes.register();
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
