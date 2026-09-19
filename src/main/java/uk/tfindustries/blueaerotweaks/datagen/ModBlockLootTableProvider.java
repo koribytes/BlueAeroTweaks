@@ -22,7 +22,20 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(BlueBlocks.SQUALLSTONE_BLOCK.get());
         dropSelf(BlueBlocks.AIR_FRYER_BLOCK.get());
 
-
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_LOG.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_WOOD.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_PLANKS.get());
+        //dropSelf(BlueBlocks.JAPANESE_CEDAR_STAIRS.get());
+        add(BlueBlocks.JAPANESE_CEDAR_SLAB.get(),
+                block -> createSlabItemTable(BlueBlocks.JAPANESE_CEDAR_SLAB.get()));
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_WALL.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_FENCE.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_FENCE_GATE.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_BUTTON.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_PRESSURE_PLATE.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_TRAPDOOR.get());
+        add(BlueBlocks.JAPANESE_CEDAR_DOOR.get(),
+                block -> createDoorTable(BlueBlocks.JAPANESE_CEDAR_DOOR.get()));
     }
 
     @Override

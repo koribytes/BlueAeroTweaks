@@ -11,10 +11,11 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -54,8 +55,56 @@ public class BlueBlocks {
     public static final DeferredBlock<Block> AIR_FRYER_BLOCK = registerBlock("air_fryer_block",
             () -> new AirFryerBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
 
+    //Japanese cedar wood set
+    public static final DeferredBlock<Block> JAPANESE_CEDAR_WOOD = registerBlock("japanese_cedar_wood",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(2f).requiresCorrectToolForDrops()));
 
+    public static final DeferredBlock<Block> JAPANESE_CEDAR_LOG = registerBlock("japanese_cedar_log",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(2f).requiresCorrectToolForDrops()));
 
+    public static final DeferredBlock<Block> JAPANESE_CEDAR_PLANKS = registerBlock("japanese_cedar_planks",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(2f).requiresCorrectToolForDrops()));
+
+    /*
+    public static final DeferredBlock<StairBlock> JAPANESE_CEDAR_STAIRS = registerBlock("japanese_cedar_stairs",
+            () -> new StairBlock(BlueBlocks.JAPANESE_CEDAR_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+     */
+    public static final DeferredBlock<SlabBlock> JAPANESE_CEDAR_SLAB = registerBlock("japanese_cedar_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<PressurePlateBlock> JAPANESE_CEDAR_PRESSURE_PLATE = registerBlock("japanese_cedar_pressure_plate",
+            () -> new PressurePlateBlock(BlockSetType.OAK,
+                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<ButtonBlock> JAPANESE_CEDAR_BUTTON = registerBlock("japanese_cedar_button",
+            () -> new ButtonBlock(BlockSetType.OAK, 20,
+                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noCollission()));
+
+    public static final DeferredBlock<FenceBlock> JAPANESE_CEDAR_FENCE = registerBlock("japanese_cedar_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<FenceGateBlock> JAPANESE_CEDAR_FENCE_GATE = registerBlock("japanese_cedar_fence_gate",
+            () -> new FenceGateBlock(WoodType.OAK,
+                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<WallBlock> JAPANESE_CEDAR_WALL = registerBlock("japanese_cedar_wall",
+            () -> new WallBlock(
+                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<DoorBlock> JAPANESE_CEDAR_DOOR = registerBlock("japanese_cedar_door",
+            () -> new DoorBlock(BlockSetType.OAK,
+                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final DeferredBlock<TrapDoorBlock> JAPANESE_CEDAR_TRAPDOOR = registerBlock("japanese_cedar_trapdoor",
+            () -> new TrapDoorBlock(BlockSetType.OAK,
+                    BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noOcclusion()));
+
+    /*
     public static final BlockEntry<AmmoDeployerBlock> AMMO_DEPLOYER = REGISTRATE.block("ammo_deployer", AmmoDeployerBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.PODZOL))
@@ -68,6 +117,8 @@ public class BlueBlocks {
             .tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
             .transform(customItemModel())
             .register();
+
+     */
 
 
 

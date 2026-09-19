@@ -31,7 +31,20 @@ public class BlueCreativeTabs {
                         output.accept(BlueBlocks.FRIED_TOFU_BLOCK);
                         output.accept(BlueBlocks.AIR_FRYER_BLOCK);
                         output.accept(BlueBlocks.SQUALLSTONE_BLOCK);
-                        output.accept(BlueBlocks.AMMO_DEPLOYER);
+                        //output.accept(BlueBlocks.AMMO_DEPLOYER);
+
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_WOOD);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_LOG);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_PLANKS);
+                        //output.accept(BlueBlocks.JAPANESE_CEDAR_STAIRS);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_SLAB);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_WALL);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_FENCE);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_FENCE_GATE);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_BUTTON);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_PRESSURE_PLATE);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_DOOR);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_TRAPDOOR);
                     }).build());
 
 

@@ -10,6 +10,19 @@
   "block.blueaerotweaks.squallstone_block": "Squallstone",
   "block.blueaerotweaks.ammo_deployer": "Ammo Deployer",
 
+  "block.blueaerotweaks.japanese_cedar_wood": "Japanese Cedar Wood",
+  "block.blueaerotweaks.japanese_cedar_log": "Japanese Cedar Log",
+  "block.blueaerotweaks.japanese_cedar_planks": "Japanese Cedar Planks",
+  "block.blueaerotweaks.japanese_cedar_stairs": "Japanese Cedar Stairs",
+  "block.blueaerotweaks.japanese_cedar_slab": "Japanese Cedar Slab",
+  "block.blueaerotweaks.japanese_cedar_wall": "Japanese Cedar Wall",
+  "block.blueaerotweaks.japanese_cedar_fence": "Japanese Cedar Fence",
+  "block.blueaerotweaks.japanese_cedar_fence_gate": "Japanese Cedar Fence Gate",
+  "block.blueaerotweaks.japanese_cedar_button": "Japanese Cedar Button",
+  "block.blueaerotweaks.japanese_cedar_pressure_plate": "Japanese Cedar Pressure Plate",
+  "block.blueaerotweaks.japanese_cedar_door": "Japanese Cedar Door",
+  "block.blueaerotweaks.japanese_cedar_trapdoor": "Japanese Cedar Trapdoor",
+
   "creativetab.blueaerotweaks.blue_aero_tweaks_items": "Blue Aero Tweaks",
 
   "tooltip.blueaerotweaks.fried_tofu.tooltip": "Tofu, but Fried",

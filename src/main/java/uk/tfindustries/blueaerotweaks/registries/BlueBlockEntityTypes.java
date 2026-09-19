@@ -37,7 +37,7 @@ public final class BlueBlockEntityTypes {
 
      */
 
-
+    /*
     public static final BlockEntityEntry<AmmoDeployerBlockEntity> AMMO_DEPLOYER = REGISTRATE
             .blockEntity("ammo_deployer", AmmoDeployerBlockEntity::new)
             .visual(() -> DeployerVisual::new)
@@ -45,6 +45,7 @@ public final class BlueBlockEntityTypes {
             .renderer(() -> DeployerRenderer::new)
             .register();
 
+     */
 
 
 
