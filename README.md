@@ -14,4 +14,9 @@ Textures
 Template
 - Neoforge
 
-This Depends on and borrows a lot of code and assets from base Create Mod
+Dependencies:
+============
+- Create
+- Sable
+- Create Simulated
+- Create Aeronautics
