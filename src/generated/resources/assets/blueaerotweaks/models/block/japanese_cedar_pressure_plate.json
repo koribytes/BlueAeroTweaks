@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "blueaerotweaks:block/japanese_cedar_planks"
+  }
+}

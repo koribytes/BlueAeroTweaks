@@ -24,8 +24,10 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         dropSelf(BlueBlocks.JAPANESE_CEDAR_LOG.get());
         dropSelf(BlueBlocks.JAPANESE_CEDAR_WOOD.get());
+        dropSelf(BlueBlocks.STRIPPED_JAPANESE_CEDAR_WOOD.get());
+        dropSelf(BlueBlocks.STRIPPED_JAPANESE_CEDAR_LOG.get());
         dropSelf(BlueBlocks.JAPANESE_CEDAR_PLANKS.get());
-        //dropSelf(BlueBlocks.JAPANESE_CEDAR_STAIRS.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_STAIRS.get());
         add(BlueBlocks.JAPANESE_CEDAR_SLAB.get(),
                 block -> createSlabItemTable(BlueBlocks.JAPANESE_CEDAR_SLAB.get()));
         dropSelf(BlueBlocks.JAPANESE_CEDAR_WALL.get());

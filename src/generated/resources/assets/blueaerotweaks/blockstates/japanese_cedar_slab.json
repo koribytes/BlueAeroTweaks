@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "blueaerotweaks:block/japanese_cedar_slab"
+    },
+    "type=double": {
+      "model": "blueaerotweaks:block/japanese_cedar_planks"
+    },
+    "type=top": {
+      "model": "blueaerotweaks:block/japanese_cedar_slab_top"
+    }
+  }
+}

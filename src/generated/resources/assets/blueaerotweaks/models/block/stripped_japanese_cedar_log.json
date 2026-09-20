@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "blueaerotweaks:block/stripped_japanese_cedar_log_top",
+    "side": "blueaerotweaks:block/stripped_japanese_cedar_log"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "blueaerotweaks:block/japanese_cedar_door_bottom",
+    "top": "blueaerotweaks:block/japanese_cedar_door_top"
+  }
+}

@@ -60,20 +60,28 @@ public class BlueBlocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(2f).requiresCorrectToolForDrops()));
 
-    public static final DeferredBlock<Block> JAPANESE_CEDAR_LOG = registerBlock("japanese_cedar_log",
+    public static final DeferredBlock<Block> STRIPPED_JAPANESE_CEDAR_WOOD = registerBlock("stripped_japanese_cedar_wood",
             () -> new Block(BlockBehaviour.Properties.of()
+                    .strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<RotatedPillarBlock> JAPANESE_CEDAR_LOG = registerBlock("japanese_cedar_log",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                    .strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_JAPANESE_CEDAR_LOG = registerBlock("stripped_japanese_cedar_log",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
                     .strength(2f).requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> JAPANESE_CEDAR_PLANKS = registerBlock("japanese_cedar_planks",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(2f).requiresCorrectToolForDrops()));
 
-    /*
+
     public static final DeferredBlock<StairBlock> JAPANESE_CEDAR_STAIRS = registerBlock("japanese_cedar_stairs",
             () -> new StairBlock(BlueBlocks.JAPANESE_CEDAR_PLANKS.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
 
-     */
+
     public static final DeferredBlock<SlabBlock> JAPANESE_CEDAR_SLAB = registerBlock("japanese_cedar_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
 

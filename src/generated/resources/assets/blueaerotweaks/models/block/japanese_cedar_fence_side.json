@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "blueaerotweaks:block/japanese_cedar_planks"
+  }
+}
