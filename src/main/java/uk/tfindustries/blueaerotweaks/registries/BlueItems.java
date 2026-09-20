@@ -9,8 +9,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
-import uk.tfindustries.blueaerotweaks.item.custom.FuelItem;
-import uk.tfindustries.blueaerotweaks.item.custom.TofuFryerItem;
+import uk.tfindustries.blueaerotweaks.content.items.FuelItem;
+import uk.tfindustries.blueaerotweaks.content.items.TofuFryerItem;
 
 import java.util.List;
 

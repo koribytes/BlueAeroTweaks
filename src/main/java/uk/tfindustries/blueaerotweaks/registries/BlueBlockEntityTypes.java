@@ -1,18 +1,9 @@
 package uk.tfindustries.blueaerotweaks.registries;
 
-import com.simibubi.create.content.kinetics.deployer.DeployerRenderer;
-import com.simibubi.create.content.kinetics.deployer.DeployerVisual;
-import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
-import uk.tfindustries.blueaerotweaks.content.AirFryer.AirFryerBlockEntity;
-import uk.tfindustries.blueaerotweaks.content.AmmoDeployer.AmmoDeployerBlockEntity;
-
-import java.util.function.Supplier;
-
-import static uk.tfindustries.blueaerotweaks.BlueAeroTweaks.REGISTRATE;
 
 public final class BlueBlockEntityTypes {
 

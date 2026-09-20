@@ -1,4 +1,4 @@
-package uk.tfindustries.blueaerotweaks.item.custom;
+package uk.tfindustries.blueaerotweaks.content.items;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

@@ -1,39 +1,21 @@
 package uk.tfindustries.blueaerotweaks.registries;
 
-import com.simibubi.create.AllTags;
-import com.simibubi.create.content.kinetics.deployer.DeployerBlock;
-import com.simibubi.create.content.kinetics.deployer.DeployerMovementBehaviour;
-import com.simibubi.create.content.kinetics.deployer.DeployerMovingInteraction;
-import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
-import com.simibubi.create.foundation.data.BlockStateGen;
-import com.simibubi.create.foundation.data.SharedProperties;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
-import uk.tfindustries.blueaerotweaks.config.BlueStress;
-import uk.tfindustries.blueaerotweaks.content.AirFryer.AirFryerBlock;
-import uk.tfindustries.blueaerotweaks.content.AirFryer.AirFryerBlockEntity;
-import uk.tfindustries.blueaerotweaks.content.AmmoDeployer.AmmoDeployerBlock;
-import uk.tfindustries.blueaerotweaks.content.Squallstone.SquallstoneBlock;
+import uk.tfindustries.blueaerotweaks.content.blocks.AirFryer.AirFryerBlock;
+import uk.tfindustries.blueaerotweaks.content.blocks.Squallstone.SquallstoneBlock;
 
 import java.util.function.Supplier;
 
-import static com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour.interactionBehaviour;
-import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
-import static uk.tfindustries.blueaerotweaks.BlueAeroTweaks.REGISTRATE;
 
 
 public class BlueBlocks {

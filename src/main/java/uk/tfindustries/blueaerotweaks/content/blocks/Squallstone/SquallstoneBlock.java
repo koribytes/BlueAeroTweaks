@@ -1,4 +1,4 @@
-package uk.tfindustries.blueaerotweaks.content.Squallstone;
+package uk.tfindustries.blueaerotweaks.content.blocks.Squallstone;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;

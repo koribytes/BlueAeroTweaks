@@ -1,8 +1,7 @@
-package uk.tfindustries.blueaerotweaks.content.AmmoDeployer;
+package uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer;
 
 
 import com.simibubi.create.content.kinetics.deployer.DeployerBlock;
-import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 
 public class AmmoDeployerBlock extends DeployerBlock {
 

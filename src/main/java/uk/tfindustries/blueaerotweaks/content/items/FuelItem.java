@@ -1,11 +1,9 @@
-package uk.tfindustries.blueaerotweaks.item.custom;
+package uk.tfindustries.blueaerotweaks.content.items;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Properties;
 
 public class FuelItem extends Item {
     private int burnTime = 0;

@@ -1,4 +1,4 @@
-package uk.tfindustries.blueaerotweaks.content.AirFryer;
+package uk.tfindustries.blueaerotweaks.content.blocks.AirFryer;
 
 import net.minecraft.world.level.block.Block;
 

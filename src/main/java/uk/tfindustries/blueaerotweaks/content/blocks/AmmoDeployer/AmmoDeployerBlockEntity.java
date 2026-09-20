@@ -1,4 +1,4 @@
-package uk.tfindustries.blueaerotweaks.content.AmmoDeployer;
+package uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer;
 
 import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 import net.minecraft.core.BlockPos;
