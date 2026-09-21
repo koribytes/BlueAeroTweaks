@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
 import uk.tfindustries.blueaerotweaks.content.blocks.AirFryer.AirFryerBlock;
+import uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarLamp.JapaneseCedarLampBlock;
 import uk.tfindustries.blueaerotweaks.content.blocks.Squallstone.SquallstoneBlock;
 
 import java.util.function.Supplier;
@@ -93,6 +94,12 @@ public class BlueBlocks {
     public static final DeferredBlock<TrapDoorBlock> JAPANESE_CEDAR_TRAPDOOR = registerBlock("japanese_cedar_trapdoor",
             () -> new TrapDoorBlock(BlockSetType.OAK,
                     BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops().noOcclusion()));
+
+
+    public static final DeferredBlock<Block> JAPANESE_CEDAR_LAMP = registerBlock("japanese_cedar_lamp",
+            () -> new JapaneseCedarLampBlock(BlockBehaviour.Properties.of().strength(2f)
+                    .requiresCorrectToolForDrops().lightLevel(state -> state.getValue(JapaneseCedarLampBlock.CLICKED) ? 15 : 0)));
+
 
     /*
     public static final BlockEntry<AmmoDeployerBlock> AMMO_DEPLOYER = REGISTRATE.block("ammo_deployer", AmmoDeployerBlock::new)

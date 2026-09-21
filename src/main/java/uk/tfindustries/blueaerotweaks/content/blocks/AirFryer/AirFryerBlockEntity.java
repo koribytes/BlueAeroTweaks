@@ -7,6 +7,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AirFryerBlockEntity extends BlockEntity {
 
+
+
     public AirFryerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }

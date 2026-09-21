@@ -38,6 +38,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(BlueBlocks.JAPANESE_CEDAR_TRAPDOOR.get());
         add(BlueBlocks.JAPANESE_CEDAR_DOOR.get(),
                 block -> createDoorTable(BlueBlocks.JAPANESE_CEDAR_DOOR.get()));
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_LAMP.get());
     }
 
     @Override

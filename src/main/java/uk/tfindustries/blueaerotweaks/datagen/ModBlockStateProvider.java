@@ -1,11 +1,14 @@
 package uk.tfindustries.blueaerotweaks.datagen;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
+import uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarLamp.JapaneseCedarLampBlock;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -49,8 +52,44 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(BlueBlocks.JAPANESE_CEDAR_PRESSURE_PLATE);
         blockItem(BlueBlocks.JAPANESE_CEDAR_TRAPDOOR, "_bottom");
 
-
+        //customLamp(BlueBlocks.JAPANESE_CEDAR_LAMP);
+        customLamp();
     }
+
+
+    /*
+    private void customLamp(DeferredBlock<?> deferredBlock) {
+        getVariantBuilder(deferredBlock.get()).forAllStates(state -> {
+            if(state.getValue(JapaneseCedarLampBlock.CLICKED)) {
+                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll(deferredBlock.getId() + "_on",
+                        ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + deferredBlock.getId() + "_on")))};
+            } else {
+                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll(deferredBlock.getId() + "_off",
+                        ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + deferredBlock.getId() + "_off")))};
+            }
+        });
+
+        simpleBlockItem(deferredBlock.get(), models().cubeAll(deferredBlock.getId() + "_on",
+                ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + deferredBlock.getId() + "_on")));
+    }
+
+     */
+
+    private void customLamp() {
+        getVariantBuilder(BlueBlocks.JAPANESE_CEDAR_LAMP.get()).forAllStates(state -> {
+            if(state.getValue(JapaneseCedarLampBlock.CLICKED)) {
+                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("japanese_cedar_lamp_on",
+                        ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + "japanese_cedar_lamp_on")))};
+            } else {
+                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("japanese_cedar_lamp_off",
+                        ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + "japanese_cedar_lamp_off")))};
+            }
+        });
+
+        simpleBlockItem(BlueBlocks.JAPANESE_CEDAR_LAMP.get(), models().cubeAll("japanese_cedar_lamp_on",
+                ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + "japanese_cedar_lamp_on")));
+    }
+
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
         simpleBlockWithItem(deferredBlock.get(), cubeAll(deferredBlock.get()));

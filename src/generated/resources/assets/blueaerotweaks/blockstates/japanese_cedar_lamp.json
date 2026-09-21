@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "clicked=false": {
+      "model": "blueaerotweaks:block/japanese_cedar_lamp_off"
+    },
+    "clicked=true": {
+      "model": "blueaerotweaks:block/japanese_cedar_lamp_on"
+    }
+  }
+}
