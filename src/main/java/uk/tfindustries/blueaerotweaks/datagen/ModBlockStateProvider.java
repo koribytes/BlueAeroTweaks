@@ -76,6 +76,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
      */
 
     private void customLamp() {
+        //This part is responsible for the block model and blockstates
         getVariantBuilder(BlueBlocks.JAPANESE_CEDAR_LAMP.get()).forAllStates(state -> {
             if(state.getValue(JapaneseCedarLampBlock.CLICKED)) {
                 return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("japanese_cedar_lamp_on",
@@ -86,6 +87,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             }
         });
 
+        //This part is just responsible for making the item. It bases it off the on state of the lamp currently
         simpleBlockItem(BlueBlocks.JAPANESE_CEDAR_LAMP.get(), models().cubeAll("japanese_cedar_lamp_on",
                 ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + "japanese_cedar_lamp_on")));
     }
@@ -102,4 +104,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void blockItem(DeferredBlock<?> deferredBlock, String appendix) {
         simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("blueaerotweaks:block/" + deferredBlock.getId().getPath() + appendix));
     }
+
+
 }

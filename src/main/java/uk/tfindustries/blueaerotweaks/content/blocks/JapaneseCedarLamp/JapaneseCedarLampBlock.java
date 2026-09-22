@@ -58,11 +58,7 @@ public class JapaneseCedarLampBlock extends Block {
     @Override
     public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, Direction side) {
         // Return true for the side where you want redstone to point/connect
-        if ((side == Direction.NORTH) || (side == Direction.SOUTH) || (side == Direction.WEST) || (side == Direction.EAST)) {
-            return true;
-        }
-
-        return false;
+        return (side == Direction.NORTH) || (side == Direction.SOUTH) || (side == Direction.WEST) || (side == Direction.EAST);
     }
 
     @Override

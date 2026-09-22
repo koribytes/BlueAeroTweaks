@@ -5,6 +5,6 @@
     "side": "blueaerotweaks:block/air_fryer_block_side",
     "top": "blueaerotweaks:block/air_fryer_block_top",
     "bottom": "blueaerotweaks:block/air_fryer_block_bottom",
-    "particle": "blueaerotweaksb:block/air_fryer_block_front_off"
+    "particle": "blueaerotweaks:block/air_fryer_block_front_off"
   }
 }
