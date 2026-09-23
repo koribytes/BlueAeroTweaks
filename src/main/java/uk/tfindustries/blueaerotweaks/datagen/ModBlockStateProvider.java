@@ -2,6 +2,7 @@ package uk.tfindustries.blueaerotweaks.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -54,6 +55,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         //customLamp(BlueBlocks.JAPANESE_CEDAR_LAMP);
         customLamp();
+        airFryerProvider();
     }
 
 
@@ -103,6 +105,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockItem(DeferredBlock<?> deferredBlock, String appendix) {
         simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("blueaerotweaks:block/" + deferredBlock.getId().getPath() + appendix));
+    }
+
+    private void airFryerProvider() {
+        this.getVariantBuilder(BlueBlocks.AIR_FRYER_BLOCK.get()).forAllStates(blockState -> {
+            final String append = blockState.getValue(BlockStateProperties.LIT) ? "_on" : "_off";
+            final int yRot = ((int)
+                    blockState.getValue(BlockStateProperties.FACING).toYRot() + 180) % 360;
+            return ConfiguredModel.builder()
+                    .modelFile(this.models().getExistingFile(this.modLoc("block/air_fryer_block" + append)))
+                    .rotationY(yRot)
+                    .uvLock(yRot != 0)
+                    .build();
+        });
+
+
     }
 
 
