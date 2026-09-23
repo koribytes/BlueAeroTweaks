@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -20,19 +21,20 @@ import org.jetbrains.annotations.Nullable;
 
 public class AirFryerBlock extends Block {
 
-    public static final BooleanProperty LIT = BooleanProperty.create("lit");
-    public static final DirectionProperty FACING = DirectionProperty.create("facing");
-
+    //public static final BooleanProperty LIT = BooleanProperty.create("lit");
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    //public static final DirectionProperty FACING = DirectionProperty.create("facing");
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     public AirFryerBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(LIT, false));
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
+
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getClickedFace()).setValue(LIT, false);
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
