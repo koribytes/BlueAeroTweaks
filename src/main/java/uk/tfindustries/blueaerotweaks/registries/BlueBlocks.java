@@ -35,8 +35,9 @@ public class BlueBlocks {
     public static final DeferredBlock<Block> SQUALLSTONE_BLOCK = registerBlock("squallstone_block",
             () -> new SquallstoneBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST)));
 
-    public static final DeferredBlock<Block> AIR_FRYER_BLOCK = registerBlock("air_fryer_block",
+    public static final DeferredBlock<AirFryerBlock> AIR_FRYER_BLOCK = registerBlock("air_fryer_block",
             () -> new AirFryerBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
 
     //Japanese cedar wood set
     public static final DeferredBlock<Block> JAPANESE_CEDAR_WOOD = registerBlock("japanese_cedar_wood",

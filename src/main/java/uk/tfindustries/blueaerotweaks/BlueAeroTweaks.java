@@ -52,7 +52,7 @@ public class BlueAeroTweaks {
         BlueCreativeTabs.register(modEventBus);
         BlueItems.register(modEventBus);
         BlueBlocks.register(modEventBus);
-        BlueBlockEntityTypes.register();
+        BlueBlockEntityTypes.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
