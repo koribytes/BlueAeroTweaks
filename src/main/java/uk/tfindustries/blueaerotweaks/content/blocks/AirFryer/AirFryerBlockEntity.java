@@ -5,13 +5,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import static uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes.AIR_FRYER_BLOCK_ENTITY;
+
 public class AirFryerBlockEntity extends BlockEntity {
-
-
-
-    public AirFryerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
-        super(type, pos, blockState);
+    public AirFryerBlockEntity(BlockPos pos, BlockState state) {
+        super(AIR_FRYER_BLOCK_ENTITY.get(), pos, state);
     }
-
-
 }
