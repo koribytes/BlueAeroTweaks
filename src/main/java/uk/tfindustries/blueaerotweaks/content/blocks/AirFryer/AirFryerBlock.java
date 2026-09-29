@@ -47,6 +47,16 @@ public class AirFryerBlock extends Block implements EntityBlock {
         builder.add(new Property[]{FACING, LIT});
     }
 
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (state.getBlock() != newState.getBlock()) {
+            if (level.getBlockEntity(pos) instanceof AirFryerBlockEntity) {
+                //AirFryerBlockEntity.drops();
+                level.updateNeighbourForOutputSignal(pos, this);
+            }
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
 
     /*
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
