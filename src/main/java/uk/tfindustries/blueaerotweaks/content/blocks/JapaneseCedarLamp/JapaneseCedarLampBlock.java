@@ -3,6 +3,8 @@ package uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarLamp;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +31,7 @@ public class JapaneseCedarLampBlock extends Block {
             level.setBlockAndUpdate(pos, state.setValue(CLICKED, !currentState));
         }
 
+        level.playSound(player, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1f, 1f);
         return InteractionResult.SUCCESS;
     }
 
