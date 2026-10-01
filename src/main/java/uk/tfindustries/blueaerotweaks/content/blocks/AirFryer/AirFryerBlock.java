@@ -2,12 +2,11 @@ package uk.tfindustries.blueaerotweaks.content.blocks.AirFryer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -68,6 +67,11 @@ public class AirFryerBlock extends Block implements EntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof AirFryerBlockEntity airFryerBlockEntity) {
+            if(player.isCrouching() && !level.isClientSide()) {
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(airFryerBlockEntity, Component.literal("Air Fryer")), pos);
+                return ItemInteractionResult.SUCCESS;
+            }
+
             if (airFryerBlockEntity.inventory.getStackInSlot(0).isEmpty() && !stack.isEmpty()) {
                 airFryerBlockEntity.inventory.insertItem(0, stack.copy(), false);
                 stack.shrink(1);

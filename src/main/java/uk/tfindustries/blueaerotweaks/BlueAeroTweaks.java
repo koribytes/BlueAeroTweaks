@@ -9,7 +9,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -25,11 +28,9 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import uk.tfindustries.blueaerotweaks.config.BlueConfig;
+import uk.tfindustries.blueaerotweaks.content.blocks.AirFryer.AirFryerScreen;
 import uk.tfindustries.blueaerotweaks.datagen.DataGenerators;
-import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
-import uk.tfindustries.blueaerotweaks.registries.BlueItems;
-import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
-import uk.tfindustries.blueaerotweaks.registries.BlueCreativeTabs;
+import uk.tfindustries.blueaerotweaks.registries.*;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(BlueAeroTweaks.MODID)
@@ -53,6 +54,7 @@ public class BlueAeroTweaks {
         BlueItems.register(modEventBus);
         BlueBlocks.register(modEventBus);
         BlueBlockEntityTypes.register(modEventBus);
+        BlueMenuTypes.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -86,6 +88,25 @@ public class BlueAeroTweaks {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
     }
+
+    /*
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(BlueMenuTypes.AIR_FRYER_MENU.get(), AirFryerScreen::new);
+    }
+
+     */
+
+    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
+    public static class ClientModEvents {
+
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(BlueMenuTypes.AIR_FRYER_MENU.get(), AirFryerScreen::new);
+        }
+    }
+
 
 
 }
