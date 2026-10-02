@@ -23,10 +23,10 @@ import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 
 public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
 
-    public final ItemStackHandler inventory = new ItemStackHandler(1) {
+    public final ItemStackHandler inventory = new ItemStackHandler(3) {
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
-            return 1;
+            return 3;
         }
 
         @Override

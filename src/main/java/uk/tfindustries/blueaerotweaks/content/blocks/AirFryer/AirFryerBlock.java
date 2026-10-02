@@ -1,5 +1,6 @@
 package uk.tfindustries.blueaerotweaks.content.blocks.AirFryer;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -28,6 +29,7 @@ public class AirFryerBlock extends Block implements EntityBlock {
 
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
+
 
     public AirFryerBlock(Properties properties) {
         super(properties);
@@ -67,11 +69,11 @@ public class AirFryerBlock extends Block implements EntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof AirFryerBlockEntity airFryerBlockEntity) {
-            if(player.isCrouching() && !level.isClientSide()) {
+            if(!level.isClientSide()) {
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(airFryerBlockEntity, Component.literal("Air Fryer")), pos);
                 return ItemInteractionResult.SUCCESS;
             }
-
+            /*
             if (airFryerBlockEntity.inventory.getStackInSlot(0).isEmpty() && !stack.isEmpty()) {
                 airFryerBlockEntity.inventory.insertItem(0, stack.copy(), false);
                 stack.shrink(1);
@@ -82,30 +84,10 @@ public class AirFryerBlock extends Block implements EntityBlock {
                 airFryerBlockEntity.clearContents();
                 level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
             }
+
+             */
         }
         return ItemInteractionResult.SUCCESS;
     }
-
-
-
-    /*
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS;
-        } else {
-            this.openContainer(level, pos, player);
-            return InteractionResult.CONSUME;
-        }
-    }
-
-    protected void openContainer(Level level, BlockPos pos, Player player) {
-        BlockEntity blockentity = level.getBlockEntity(pos);
-        if (blockentity instanceof AirFryerBlockEntity) {
-            player.openMenu((MenuProvider)blockentity);
-        }
-
-    }
-
-     */
 
 }
