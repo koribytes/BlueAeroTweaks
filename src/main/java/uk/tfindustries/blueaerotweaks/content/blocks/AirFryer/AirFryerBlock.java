@@ -15,6 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -23,6 +25,9 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
+
+import static uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes.AIR_FRYER_BLOCK_ENTITY;
 
 
 public class AirFryerBlock extends Block implements EntityBlock {
@@ -89,5 +94,24 @@ public class AirFryerBlock extends Block implements EntityBlock {
         }
         return ItemInteractionResult.SUCCESS;
     }
+
+    private static <E extends BlockEntity, A extends BlockEntity> @Nullable BlockEntityTicker<A> createTickerHelper(
+            BlockEntityType<A> type, BlockEntityType<E> checkedType, BlockEntityTicker<? super E> ticker
+    ) {
+        return checkedType == type ? (BlockEntityTicker<A>) ticker : null;
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (level.isClientSide()) {
+            return null;
+        }
+        // You can return different tickers here, depending on whatever factors you want. A common use case would be
+        // to return different tickers on the client or server, only tick one side to begin with,
+        // or only return a ticker for some blockstates (e.g. when using a "my machine is working" blockstate property).
+        return createTickerHelper(type, AIR_FRYER_BLOCK_ENTITY.get(), AirFryerBlockEntity::tick);
+    }
+
+
 
 }
