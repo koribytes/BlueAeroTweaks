@@ -44,22 +44,24 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
     private static final int FUEL_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
 
-    protected final ContainerData progressData;
-    protected final ContainerData fuelData;
+    protected final ContainerData data;
+    //protected final ContainerData fuelData;
     private int progress = 0;
     private int progressMax = 72;
     private int fuelBurnProgress = 0;
-    private int fuelBurnProgressMax = 120;
+    private int fuelBurnProgressMax = 800;
 
 
     public AirFryerBlockEntity(BlockPos pos, BlockState state) {
         super(BlueBlockEntityTypes.AIR_FRYER_BLOCK_ENTITY.get(), pos, state);
-        progressData = new ContainerData() {
+        data = new ContainerData() {
             @Override
             public int get(int i) {
                 return switch (i) {
                     case 0 -> AirFryerBlockEntity.this.progress;
                     case 1 -> AirFryerBlockEntity.this.progressMax;
+                    case 2 -> AirFryerBlockEntity.this.fuelBurnProgress;
+                    case 3 -> AirFryerBlockEntity.this.fuelBurnProgressMax;
                     default -> 0;
                 };
             }
@@ -69,15 +71,17 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
                 switch (i) {
                     case 0: AirFryerBlockEntity.this.progress = value;
                     case 1: AirFryerBlockEntity.this.progressMax = value;
+                    case 2: AirFryerBlockEntity.this.fuelBurnProgress = value;
+                    case 3: AirFryerBlockEntity.this.fuelBurnProgressMax = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 4;
             }
         };
-
+        /*
         fuelData = new ContainerData() {
             @Override
             public int get(int i) {
@@ -101,6 +105,8 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
                 return 2;
             }
         };
+
+         */
     }
 
 
@@ -123,6 +129,8 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
         tag.put("inventory", inventory.serializeNBT(registries));
         tag.putInt("air_fryer.progress", progress);
         tag.putInt("air_fryer.progress_max", progressMax);
+        tag.putInt("air_fryer.fuel_burn_progress", fuelBurnProgress);
+        tag.putInt("air_fryer.fuel_burn_progress_max", fuelBurnProgressMax);
         super.saveAdditional(tag, registries);
     }
 
@@ -133,6 +141,8 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
         inventory.deserializeNBT(registries, tag.getCompound("inventory"));
         progress = tag.getInt("air_fryer.progress");
         progressMax = tag.getInt("air_fryer.progress_max");
+        fuelBurnProgress = tag.getInt("air_fryer.fuel_burn_progress");
+        fuelBurnProgressMax = tag.getInt("air_fryer.fuel_burn_progress_max");
     }
 
 
@@ -155,7 +165,7 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new AirFryerMenu(i, inventory, this);
+        return new AirFryerMenu(i, inventory, this, this.data);
     }
 
     // The signature of this method matches the signature of the BlockEntityTicker functional interface.
@@ -166,7 +176,6 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
                 blockEntity.startFuelBurn();
             }
         }
-
         //if there is fuel burning, increment it
         if (blockEntity.hasFuelBurning()) {
             blockEntity.incrementFuelBurn();

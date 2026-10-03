@@ -1,12 +1,9 @@
 package uk.tfindustries.blueaerotweaks.content.blocks.AirFryer;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 
 import static uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes.AIR_FRYER_BLOCK_ENTITY;
 

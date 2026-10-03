@@ -3,15 +3,11 @@ package uk.tfindustries.blueaerotweaks.content.blocks.AirFryer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
 import uk.tfindustries.blueaerotweaks.registries.BlueMenuTypes;
 
@@ -19,15 +15,17 @@ public class AirFryerMenu extends AbstractContainerMenu {
 
     private final AirFryerBlockEntity blockEntity;
     private final Level level;
+    private final ContainerData data;
 
     public AirFryerMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
-    public AirFryerMenu(int containerId, Inventory inv, BlockEntity blockEntity) {
+    public AirFryerMenu(int containerId, Inventory inv, BlockEntity blockEntity, ContainerData data) {
         super(BlueMenuTypes.AIR_FRYER_MENU.get(), containerId);
         this.blockEntity = ((AirFryerBlockEntity) blockEntity);
         this.level = inv.player.level();
+        this.data = data;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -35,6 +33,28 @@ public class AirFryerMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 56, 17));
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 56, 53));
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 2, 116, 35));
+
+        addDataSlots(data);
+    }
+
+    public boolean isCrafting() {
+        return data.get(0) > 0;
+    }
+
+    public int getScaledArrowProgress() {
+        int progress = this.data.get(0);
+        int progressMax = this.data.get(1);
+        int arrowPixelSize = 24;
+
+        return progressMax != 0 && progress != 0 ? progress * arrowPixelSize / progressMax : 0;
+    }
+
+    public int getScaledLitProgress() {
+        int fuelBurnProgress = this.data.get(2);
+        int fuelBurnProgressMax = this.data.get(3);
+        int litPixelSize = 14;
+
+        return fuelBurnProgressMax != 0 && fuelBurnProgress != 0 ? fuelBurnProgress * litPixelSize / fuelBurnProgressMax : 0;
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
