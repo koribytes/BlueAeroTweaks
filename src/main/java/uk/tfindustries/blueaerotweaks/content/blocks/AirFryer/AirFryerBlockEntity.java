@@ -172,6 +172,10 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
             blockEntity.incrementFuelBurn();
         }
 
+        else {
+            //blockEntity.turnOff();
+        }
+
         //if there is a valid recipe, check for fuel
         if(blockEntity.hasRecipe()) {
             //if there is fuel burning, increment the processes
@@ -222,10 +226,12 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void incrementFuelBurn() {
-
+        fuelBurnProgress--;
     }
 
     private void startFuelBurn() {
+        inventory.extractItem(FUEL_SLOT, 1, false);
+        fuelBurnProgress = fuelBurnProgressMax;
     }
 
     private boolean hasFuel() {
@@ -257,8 +263,9 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
 
 
     private boolean hasFuelBurning() {
-        return true;
+        return fuelBurnProgress != 0;
     }
+
 
 
 }
