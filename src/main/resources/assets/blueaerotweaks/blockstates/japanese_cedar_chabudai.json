@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "blueaerotweaks:block/japanese_cedar_chabudai"
+    },
+    "facing=south": {
+      "model": "blueaerotweaks:block/japanese_cedar_chabudai",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "blueaerotweaks:block/japanese_cedar_chabudai",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "blueaerotweaks:block/japanese_cedar_chabudai",
+      "y": 270
+    }
+  }
+}

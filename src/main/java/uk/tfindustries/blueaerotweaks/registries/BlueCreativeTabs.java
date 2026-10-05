@@ -48,6 +48,7 @@ public class BlueCreativeTabs {
                         output.accept(BlueBlocks.JAPANESE_CEDAR_DOOR);
                         output.accept(BlueBlocks.JAPANESE_CEDAR_TRAPDOOR);
                         output.accept(BlueBlocks.JAPANESE_CEDAR_LAMP);
+                        output.accept(BlueBlocks.JAPANESE_CEDAR_CHABUDAI.get());
                     }).build());
 
 

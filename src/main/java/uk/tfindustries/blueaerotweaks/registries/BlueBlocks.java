@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
 import uk.tfindustries.blueaerotweaks.content.blocks.AirFryer.AirFryerBlock;
+import uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarChabudai.JapaneseCedarChabudaiBlock;
 import uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarLamp.JapaneseCedarLampBlock;
 import uk.tfindustries.blueaerotweaks.content.blocks.Squallstone.SquallstoneBlock;
 
@@ -100,6 +101,9 @@ public class BlueBlocks {
     public static final DeferredBlock<Block> JAPANESE_CEDAR_LAMP = registerBlock("japanese_cedar_lamp",
             () -> new JapaneseCedarLampBlock(BlockBehaviour.Properties.of().strength(2f).sound(SoundType.WOOD)
                     .requiresCorrectToolForDrops().lightLevel(state -> state.getValue(JapaneseCedarLampBlock.CLICKED) ? 15 : 0)));
+
+    public static final DeferredBlock<Block> JAPANESE_CEDAR_CHABUDAI = registerBlock("japanese_cedar_chabudai",
+            () -> new JapaneseCedarChabudaiBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
 
     /*
