@@ -41,6 +41,10 @@ public class AirFryerMenu extends AbstractContainerMenu {
         return data.get(0) > 0;
     }
 
+    public boolean isBurning() {
+        return data.get(2) > 0;
+    }
+
     public int getScaledArrowProgress() {
         int progress = this.data.get(0);
         int progressMax = this.data.get(1);

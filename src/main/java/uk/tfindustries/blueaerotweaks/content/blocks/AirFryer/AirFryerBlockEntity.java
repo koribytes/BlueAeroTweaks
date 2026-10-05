@@ -179,6 +179,7 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
         //if there is fuel burning, increment it
         if (blockEntity.hasFuelBurning()) {
             blockEntity.incrementFuelBurn();
+            setChanged(level, pos, state);
         }
 
         else {
@@ -192,6 +193,7 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
                 blockEntity.increaseCraftingProgress();
                 setChanged(level, pos, state);
                 //if an item is done, craft it and reset progress
+
                 if (blockEntity.hasCraftingFinished()) {
                     blockEntity.craftItem();
                     blockEntity.resetProgress();

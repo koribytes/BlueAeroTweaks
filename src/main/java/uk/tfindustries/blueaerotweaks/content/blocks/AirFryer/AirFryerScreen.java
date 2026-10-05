@@ -53,7 +53,7 @@ public class AirFryerScreen extends AbstractContainerScreen<AirFryerMenu> {
     }
 
     private void renderProgressLit(GuiGraphics guiGraphics, int x, int y) {
-        if(menu.isCrafting()) {
+        if(menu.isBurning()) {
             guiGraphics.blit(LIT_TEXTURE,x + 57, y + 37 + 14 - menu.getScaledLitProgress(), 0, 14 - menu.getScaledLitProgress(), 14, menu.getScaledLitProgress(), 14, 14);
         }
     }
