@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
 import uk.tfindustries.blueaerotweaks.content.blocks.AirFryer.AirFryerBlock;
+import uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer.AmmoDeployerBlock;
 import uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarChabudai.JapaneseCedarChabudaiBlock;
 import uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarLamp.JapaneseCedarLampBlock;
 import uk.tfindustries.blueaerotweaks.content.blocks.Squallstone.SquallstoneBlock;
@@ -38,6 +39,9 @@ public class BlueBlocks {
 
     public static final DeferredBlock<AirFryerBlock> AIR_FRYER_BLOCK = registerBlock("air_fryer_block",
             () -> new AirFryerBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<AmmoDeployerBlock> AMMO_DEPLOYER_BLOCK = registerBlock("ammo_deployer_block",
+            () -> new AmmoDeployerBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
 
 
     //Japanese cedar wood set

@@ -2,12 +2,16 @@ package uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer;
 
 import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 
-public class AmmoDeployerBlockEntity extends DeployerBlockEntity {
+public class AmmoDeployerBlockEntity extends BlockEntity {
 
-    public AmmoDeployerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
+    public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
+        super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
     }
+
+
 }
