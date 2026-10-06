@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 
-public class AmmoDeployerBlockEntity extends BlockEntity {
+public class AmmoDeployerBlockEntity extends DeployerBlockEntity {
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
