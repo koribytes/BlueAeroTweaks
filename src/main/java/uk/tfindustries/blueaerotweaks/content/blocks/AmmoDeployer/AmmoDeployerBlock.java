@@ -21,4 +21,6 @@ public class AmmoDeployerBlock extends DeployerBlock {
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new AmmoDeployerBlockEntity(blockPos, blockState);
     }
+
+    //override the shape method getShaped
 }
