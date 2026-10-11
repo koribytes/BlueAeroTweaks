@@ -44,6 +44,12 @@ public class AmmoDeployerBlock extends DeployerBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        //
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+
+
         Component message = Component.literal("Testing");
         player.sendSystemMessage(message);
         InteractionHand hand = InteractionHand.MAIN_HAND;
@@ -58,6 +64,7 @@ public class AmmoDeployerBlock extends DeployerBlock {
 
         //return super.useWithoutItem(state, level, pos, player, hitResult);
         return InteractionResult.SUCCESS;
+
     }
 
 
