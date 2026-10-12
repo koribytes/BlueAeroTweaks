@@ -6,6 +6,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +19,7 @@ import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 
 import java.util.UUID;
 
-public class AmmoDeployerBlockEntity extends KineticBlockEntity {
+public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clearable {
 
     public UUID owner;
     protected boolean redstoneLocked;
@@ -33,26 +34,6 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity {
     }
 
 
-    /*
-    public final ItemStackHandler inventory = new ItemStackHandler(1) {
-        @Override
-        protected int getStackLimit(int slot, ItemStack stack) {
-            return 1;
-        }
-
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-            if (!level.isClientSide()) {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 1);
-            }
-        }
-    };
-
-     */
-
-
-
     public void drops() {
         SimpleContainer inv = new SimpleContainer(inventory.getSlots());
         for(int i = 0; i < inventory.getSlots(); i++) {
@@ -60,10 +41,6 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity {
         }
 
         Containers.dropContents(this.level, this.worldPosition, inv);
-    }
-
-    public void clearContents() {
-        inventory.setStackInSlot(0, ItemStack.EMPTY);
     }
 
 
@@ -81,9 +58,41 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity {
     public void tick() {
         super.tick();
 
+        if (getSpeed() == 0)
+            return;
+
+        if (inventory.remainingTime == -1) {
+            if (!inventory.isEmpty() && !canPlaceBlock())
+                start(inventory.getStackInSlot(0));
+            return;
+        }
+
+
+        //conditions to be met
+        //
+
+        //check if the machine is being rotationally powered
+        //check if starting conditions are met for this thing to even place
+        //start aka place block
+        //blockPlacedRecently = true
+
+
+        //if blockPlacedRecently = true then progress cooldown timer
+
+
+        //once cooldown timer is equal to or greater than cooldownMax, blockPlacedRecently = false
 
     }
 
+    private boolean canPlaceBlock() {
+        return false;
+    }
+
     private void start(ItemStack itemStack) {
+    }
+
+    @Override
+    public void clearContent() {
+        inventory.clear();
     }
 }

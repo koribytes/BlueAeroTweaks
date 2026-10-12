@@ -95,7 +95,7 @@ public class AmmoDeployerBlock extends DirectionalAxisKineticBlock implements IB
             else if(stack.isEmpty()) {
                 ItemStack stackOnAmmoDeployer = ammoDeployerBlockEntity.inventory.getStackInSlot(0);
                 player.setItemInHand(InteractionHand.MAIN_HAND, stackOnAmmoDeployer);
-                ammoDeployerBlockEntity.clearContents();
+                ammoDeployerBlockEntity.clearContent();
                 level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
             }
         }
