@@ -74,19 +74,6 @@ public class AirFryerBlock extends Block implements EntityBlock {
                 ((ServerPlayer) player).openMenu(new SimpleMenuProvider(airFryerBlockEntity, Component.literal("Air Fryer")), pos);
                 return ItemInteractionResult.SUCCESS;
             }
-            /*
-            if (airFryerBlockEntity.inventory.getStackInSlot(0).isEmpty() && !stack.isEmpty()) {
-                airFryerBlockEntity.inventory.insertItem(0, stack.copy(), false);
-                stack.shrink(1);
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-            } else if (stack.isEmpty()) {
-                ItemStack stackOnPedestal = airFryerBlockEntity.inventory.extractItem(0, 1, false);
-                player.setItemInHand(InteractionHand.MAIN_HAND, stackOnPedestal);
-                airFryerBlockEntity.clearContents();
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
-            }
-
-             */
         }
         return ItemInteractionResult.SUCCESS;
     }

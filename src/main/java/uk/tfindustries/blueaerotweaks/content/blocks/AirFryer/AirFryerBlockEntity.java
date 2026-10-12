@@ -81,32 +81,6 @@ public class AirFryerBlockEntity extends BlockEntity implements MenuProvider {
                 return 4;
             }
         };
-        /*
-        fuelData = new ContainerData() {
-            @Override
-            public int get(int i) {
-                return switch (i) {
-                    case 0 -> AirFryerBlockEntity.this.fuelBurnProgress;
-                    case 1 -> AirFryerBlockEntity.this.fuelBurnProgressMax;
-                    default -> 2;
-                };
-            }
-
-            @Override
-            public void set(int i, int value) {
-                switch (i) {
-                    case 0: AirFryerBlockEntity.this.fuelBurnProgress = value;
-                    case 1: AirFryerBlockEntity.this.fuelBurnProgressMax = value;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        };
-
-         */
     }
 
 
