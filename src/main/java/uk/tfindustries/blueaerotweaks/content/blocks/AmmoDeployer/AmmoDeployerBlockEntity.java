@@ -2,6 +2,7 @@ package uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer;
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
+import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import uk.tfindustries.blueaerotweaks.config.BlueConfig;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 
 import java.util.UUID;
@@ -20,12 +22,18 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity {
 
     public UUID owner;
     protected boolean redstoneLocked;
+    ProcessingInventory inventory;
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
+        //temporarily hard coding the withSlotLimit method
+        inventory = new ProcessingInventory(this::start).withSlotLimit(false);
+        inventory.remainingTime = -1;
         redstoneLocked = false;
     }
 
+
+    /*
     public final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
@@ -40,6 +48,10 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity {
             }
         }
     };
+
+     */
+
+
 
     public void drops() {
         SimpleContainer inv = new SimpleContainer(inventory.getSlots());
@@ -68,5 +80,10 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity {
     @Override
     public void tick() {
         super.tick();
+
+
+    }
+
+    private void start(ItemStack itemStack) {
     }
 }
