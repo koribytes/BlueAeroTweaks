@@ -6,16 +6,21 @@ import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import uk.tfindustries.blueaerotweaks.config.BlueConfig;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
+import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
+import uk.tfindustries.blueaerotweaks.registries.BlueItems;
 
 import java.util.UUID;
 
@@ -24,6 +29,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     public UUID owner;
     protected boolean redstoneLocked;
     ProcessingInventory inventory;
+    int cooldownMax, cooldownProgress;
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
@@ -31,6 +37,9 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         inventory = new ProcessingInventory(this::start).withSlotLimit(false);
         inventory.remainingTime = -1;
         redstoneLocked = false;
+        //temp hardcoded 10sec
+        cooldownMax = 200;
+        cooldownProgress = 0;
     }
 
 
@@ -61,15 +70,23 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         if (getSpeed() == 0)
             return;
 
-        if (inventory.remainingTime == -1) {
-            if (!inventory.isEmpty() && !canPlaceBlock())
-                start(inventory.getStackInSlot(0));
+        if (inventory.remainingTime > 0) {
+            inventory.remainingTime--;
+        }
+
+        if (!isWhitelisted()) {
             return;
         }
 
+        if (inventory.remainingTime <= 0) {
+            if (!inventory.isEmpty() && canPlaceBlock()) {
+                placeBlock();
+                inventory.remainingTime = cooldownMax;
+            }
+        }
 
-        //conditions to be met
-        //
+
+
 
         //check if the machine is being rotationally powered
         //check if starting conditions are met for this thing to even place
@@ -84,8 +101,25 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
     }
 
-    private boolean canPlaceBlock() {
+    private boolean isWhitelisted() {
+        //temporary hard coded
+        if (inventory.getStackInSlot(0).is(Items.COAL_BLOCK)) {
+            return true;
+        }
+
         return false;
+    }
+
+    private void placeBlock()
+    {
+
+        //place block
+        //remove item from inventory
+    }
+
+    //WIP
+    private boolean canPlaceBlock() {
+        return true;
     }
 
     private void start(ItemStack itemStack) {
