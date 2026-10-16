@@ -6,16 +6,24 @@ import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import uk.tfindustries.blueaerotweaks.config.BlueConfig;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
@@ -29,7 +37,13 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     public UUID owner;
     protected boolean redstoneLocked;
     ProcessingInventory inventory;
-    int cooldownMax, cooldownProgress;
+    int cooldownMax;
+    protected ItemStack heldItem;
+    private IItemHandlerModifiable invHandler;
+    private ListTag deferredInventoryList;
+
+
+    AmmoDeployerFakePlayer player;
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
@@ -39,8 +53,9 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         redstoneLocked = false;
         //temp hardcoded 10sec
         cooldownMax = 200;
-        cooldownProgress = 0;
     }
+
+
 
 
     public void drops() {
@@ -112,9 +127,10 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
     private void placeBlock()
     {
-
         //place block
         //remove item from inventory
+        ItemStack stack = player.getMainHandItem();
+        //InteractionResult onItemUse = stack.useOn(itemusecontext);
     }
 
     //WIP
@@ -128,5 +144,19 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     @Override
     public void clearContent() {
         inventory.clear();
+    }
+
+    public void discardPlayer() {
+        if (player == null)
+            return;
+        player.getInventory()
+                .dropAll();
+        //overflowItems.forEach(itemstack -> player.drop(itemstack, true, false));
+        player.discard();
+        player = null;
+    }
+
+    public AmmoDeployerFakePlayer getPlayer() {
+        return player;
     }
 }
