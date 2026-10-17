@@ -3,7 +3,11 @@ package uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer;
 
 import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
+import net.createmod.catnip.placement.IPlacementHelper;
+import net.createmod.catnip.placement.PlacementOffset;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -19,12 +23,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import uk.tfindustries.blueaerotweaks.content.blocks.AirFryer.AirFryerBlockEntity;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
+import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class AmmoDeployerBlock extends DirectionalAxisKineticBlock implements IBE<AmmoDeployerBlockEntity> {
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+
     public AmmoDeployerBlock(Properties properties) {
         super(properties);
     }
@@ -102,5 +114,6 @@ public class AmmoDeployerBlock extends DirectionalAxisKineticBlock implements IB
 
         return ItemInteractionResult.SUCCESS;
     }
+
 
 }

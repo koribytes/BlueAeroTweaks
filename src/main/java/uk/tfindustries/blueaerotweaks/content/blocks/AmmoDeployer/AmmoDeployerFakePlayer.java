@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-@EventBusSubscriber
 public class AmmoDeployerFakePlayer extends DeployerFakePlayer {
 
     public AmmoDeployerFakePlayer(ServerLevel world, @Nullable UUID owner) {
