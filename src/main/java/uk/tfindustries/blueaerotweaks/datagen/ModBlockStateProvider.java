@@ -1,7 +1,14 @@
 package uk.tfindustries.blueaerotweaks.datagen;
 
+import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -11,6 +18,8 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
 import uk.tfindustries.blueaerotweaks.content.blocks.JapaneseCedarLamp.JapaneseCedarLampBlock;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
+
+import java.util.function.BiFunction;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -56,6 +65,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //customLamp(BlueBlocks.JAPANESE_CEDAR_LAMP);
         customLamp();
         airFryerProvider();
+        ammoDeployerProvider(($, vertical) -> this.models()
+                .getExistingFile(this.modLoc("block/ammo_deployer_block" + "_" + (vertical ? "vertical" : "horizontal"))));
     }
 
 
@@ -118,8 +129,49 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .uvLock(yRot != 0)
                     .build();
         });
+    }
 
+    private void ammoDeployerProvider(BiFunction<BlockState, Boolean, ModelFile> modelFunc) {
+        this.getVariantBuilder(BlueBlocks.AMMO_DEPLOYER_BLOCK.get()).forAllStates(blockState -> {
+            boolean alongFirst = blockState.getValue(DirectionalAxisKineticBlock.AXIS_ALONG_FIRST_COORDINATE);
+            Direction direction = blockState.getValue(DirectionalAxisKineticBlock.FACING);
+            boolean vertical = direction.getAxis()
+                    .isHorizontal() && (direction.getAxis() == Direction.Axis.X) == alongFirst;
+            int xRot = direction == Direction.DOWN ? 270 : direction == Direction.UP ? 90 : 0;
+            int yRot = direction.getAxis()
+                    .isVertical() ? alongFirst ? 0 : 90 : (int) direction.toYRot();
+            return ConfiguredModel.builder()
+                    .modelFile(modelFunc.apply(blockState, vertical))
+                    .rotationX(xRot)
+                    .rotationY(yRot)
+                    .build();
+        });
+    }
 
+    public static <T extends DirectionalAxisKineticBlock> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> directionalAxisBlockProvider() {
+        return (c, p) -> directionalAxisBlock(c, p, ($, vertical) -> p.models()
+                .getExistingFile(p.modLoc("block/" + c.getName() + "/" + (vertical ? "vertical" : "horizontal"))));
+    }
+
+    public static <T extends DirectionalAxisKineticBlock> void directionalAxisBlock(DataGenContext<Block, T> ctx,
+                                                                                    RegistrateBlockstateProvider prov, BiFunction<BlockState, Boolean, ModelFile> modelFunc) {
+        prov.getVariantBuilder(ctx.getEntry())
+                .forAllStates(state -> {
+
+                    boolean alongFirst = state.getValue(DirectionalAxisKineticBlock.AXIS_ALONG_FIRST_COORDINATE);
+                    Direction direction = state.getValue(DirectionalAxisKineticBlock.FACING);
+                    boolean vertical = direction.getAxis()
+                            .isHorizontal() && (direction.getAxis() == Direction.Axis.X) == alongFirst;
+                    int xRot = direction == Direction.DOWN ? 270 : direction == Direction.UP ? 90 : 0;
+                    int yRot = direction.getAxis()
+                            .isVertical() ? alongFirst ? 0 : 90 : (int) direction.toYRot();
+
+                    return ConfiguredModel.builder()
+                            .modelFile(modelFunc.apply(state, vertical))
+                            .rotationX(xRot)
+                            .rotationY(yRot)
+                            .build();
+                });
     }
 
 

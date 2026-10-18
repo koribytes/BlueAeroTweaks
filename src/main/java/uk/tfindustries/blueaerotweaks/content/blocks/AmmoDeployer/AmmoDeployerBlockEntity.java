@@ -46,6 +46,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     protected ItemStack heldItem;
     private IItemHandlerModifiable invHandler;
     private ListTag deferredInventoryList;
+    Direction placementSetting;
 
 
     AmmoDeployerFakePlayer player;
@@ -58,6 +59,9 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         redstoneLocked = false;
         //temp hardcoded 10sec
         cooldownMax = 200;
+        //defaults to the same facing as the block
+        placementSetting = getBlockState().getValue(FACING);;
+
     }
 
 
@@ -180,7 +184,6 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         testPlayer.setItemInHand(hand, stack);
         UseOnContext itemusecontext = new UseOnContext(testPlayer, hand, result);
         stack.useOn(itemusecontext);
-        //InteractionResult onItemUse = stack.useOn(itemusecontext);
     }
 
 

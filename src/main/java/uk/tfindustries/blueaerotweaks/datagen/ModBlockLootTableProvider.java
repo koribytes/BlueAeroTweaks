@@ -21,6 +21,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(BlueBlocks.FRIED_TOFU_BLOCK.get());
         dropSelf(BlueBlocks.SQUALLSTONE_BLOCK.get());
         dropSelf(BlueBlocks.AIR_FRYER_BLOCK.get());
+        dropSelf(BlueBlocks.AMMO_DEPLOYER_BLOCK.get());
+
 
         dropSelf(BlueBlocks.JAPANESE_CEDAR_LOG.get());
         dropSelf(BlueBlocks.JAPANESE_CEDAR_WOOD.get());
@@ -39,6 +41,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(BlueBlocks.JAPANESE_CEDAR_DOOR.get(),
                 block -> createDoorTable(BlueBlocks.JAPANESE_CEDAR_DOOR.get()));
         dropSelf(BlueBlocks.JAPANESE_CEDAR_LAMP.get());
+        dropSelf(BlueBlocks.JAPANESE_CEDAR_CHABUDAI.get());
     }
 
     @Override
