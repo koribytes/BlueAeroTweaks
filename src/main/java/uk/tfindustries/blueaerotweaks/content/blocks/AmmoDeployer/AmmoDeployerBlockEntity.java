@@ -115,8 +115,6 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         }
 
 
-
-
         //check if the machine is being rotationally powered
         //check if starting conditions are met for this thing to even place
         //start aka place block
@@ -245,4 +243,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         }
         //invHandler = createHandler();
     }
+
+
+
 }

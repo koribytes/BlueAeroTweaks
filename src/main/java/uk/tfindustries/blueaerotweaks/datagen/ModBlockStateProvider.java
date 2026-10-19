@@ -70,24 +70,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
 
-    /*
-    private void customLamp(DeferredBlock<?> deferredBlock) {
-        getVariantBuilder(deferredBlock.get()).forAllStates(state -> {
-            if(state.getValue(JapaneseCedarLampBlock.CLICKED)) {
-                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll(deferredBlock.getId() + "_on",
-                        ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + deferredBlock.getId() + "_on")))};
-            } else {
-                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll(deferredBlock.getId() + "_off",
-                        ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + deferredBlock.getId() + "_off")))};
-            }
-        });
-
-        simpleBlockItem(deferredBlock.get(), models().cubeAll(deferredBlock.getId() + "_on",
-                ResourceLocation.fromNamespaceAndPath(BlueAeroTweaks.MODID, "block/" + deferredBlock.getId() + "_on")));
-    }
-
-     */
-
     private void customLamp() {
         //This part is responsible for the block model and blockstates
         getVariantBuilder(BlueBlocks.JAPANESE_CEDAR_LAMP.get()).forAllStates(state -> {
@@ -147,32 +129,5 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .build();
         });
     }
-
-    public static <T extends DirectionalAxisKineticBlock> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> directionalAxisBlockProvider() {
-        return (c, p) -> directionalAxisBlock(c, p, ($, vertical) -> p.models()
-                .getExistingFile(p.modLoc("block/" + c.getName() + "/" + (vertical ? "vertical" : "horizontal"))));
-    }
-
-    public static <T extends DirectionalAxisKineticBlock> void directionalAxisBlock(DataGenContext<Block, T> ctx,
-                                                                                    RegistrateBlockstateProvider prov, BiFunction<BlockState, Boolean, ModelFile> modelFunc) {
-        prov.getVariantBuilder(ctx.getEntry())
-                .forAllStates(state -> {
-
-                    boolean alongFirst = state.getValue(DirectionalAxisKineticBlock.AXIS_ALONG_FIRST_COORDINATE);
-                    Direction direction = state.getValue(DirectionalAxisKineticBlock.FACING);
-                    boolean vertical = direction.getAxis()
-                            .isHorizontal() && (direction.getAxis() == Direction.Axis.X) == alongFirst;
-                    int xRot = direction == Direction.DOWN ? 270 : direction == Direction.UP ? 90 : 0;
-                    int yRot = direction.getAxis()
-                            .isVertical() ? alongFirst ? 0 : 90 : (int) direction.toYRot();
-
-                    return ConfiguredModel.builder()
-                            .modelFile(modelFunc.apply(state, vertical))
-                            .rotationX(xRot)
-                            .rotationY(yRot)
-                            .build();
-                });
-    }
-
 
 }

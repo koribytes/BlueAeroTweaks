@@ -69,6 +69,15 @@ repositories {
         name = "Curios"
         url = uri("https://maven.theillusivec4.top/")
     }
+
+    maven { // Ritchie's Projectile Library
+        url = "https://maven.realrobotix.me/master/"
+        content {
+            includeGroup("com.rbasamoyai") // THIS IS IMPORTANT
+        }
+    }
+
+
 }
 
 base {
@@ -164,8 +173,18 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation ("com.rbasamoyai:ritchiesprojectilelib:{ritchies_lib_version}+mc{minecraft_version}") { transitive = false }
 
     implementation("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+
+    // Ritchie's Projectile Library
+    String rplSuffix = Boolean.valueOf(use_rpl_nightly) ? "-build.${rpl_build}" : ""
+    implementation("com.rbasamoyai:ritchiesprojectilelib:${rpl_version}+mc.${minecraft_version}-neoforge$rplSuffix") { transitive = false }
+
+    implementation "maven.modrinth:GWp4jCJj:bOiDu0LS"
+
+
+    implementation "maven.modrinth:UT2M39wf:bPYeUWZx"
 
     // Sable & Create Aeronautics
     implementation("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
