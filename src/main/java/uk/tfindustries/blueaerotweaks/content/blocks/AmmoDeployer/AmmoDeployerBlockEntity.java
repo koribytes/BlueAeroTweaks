@@ -44,26 +44,25 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
     public UUID owner;
     protected boolean redstoneLocked;
-    ProcessingInventory inventory;
-    int cooldownMax;
+    //ProcessingInventory inventory;
+    int cooldownMax, timer;
     protected ItemStack heldItem;
     private IItemHandlerModifiable invHandler;
     private ListTag deferredInventoryList;
     Direction placementSetting;
-
 
     AmmoDeployerFakePlayer player;
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
         //temporarily hard coding the withSlotLimit method
-        inventory = new ProcessingInventory(this::start).withSlotLimit(false);
-        inventory.remainingTime = -1;
+        //inventory = new ProcessingInventory(this::start).withSlotLimit(false);
+        timer = -1;
         redstoneLocked = false;
         //temp hardcoded 10sec
         cooldownMax = 200;
         //defaults to the same facing as the block
-        placementSetting = getBlockState().getValue(FACING);;
+        placementSetting = getBlockState().getValue(FACING);
 
     }
 
@@ -71,12 +70,15 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
 
     public void drops() {
+        /*
         SimpleContainer inv = new SimpleContainer(inventory.getSlots());
         for(int i = 0; i < inventory.getSlots(); i++) {
             inv.setItem(i, inventory.getStackInSlot(i));
         }
 
         Containers.dropContents(this.level, this.worldPosition, inv);
+
+         */
     }
 
 
@@ -102,18 +104,18 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         if (player == null)
             return;
 
-        if (inventory.remainingTime > 0) {
-            inventory.remainingTime--;
+        if (timer > 0) {
+            timer--;
         }
 
         if (!isWhitelisted()) {
             return;
         }
 
-        if (inventory.remainingTime <= 0) {
-            if (!inventory.isEmpty() && canPlaceBlock()) {
+        if (timer <= 0) {
+            if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && canPlaceBlock()) {
                 placeBlock();
-                inventory.remainingTime = cooldownMax;
+                timer = cooldownMax;
             }
         }
 
@@ -132,7 +134,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     }
 
     private boolean isWhitelisted() {
-        return Block.byItem(inventory.getStackInSlot(0).getItem()) instanceof BigCannonMunitionBlock;
+        return Block.byItem(player.getItemInHand(InteractionHand.MAIN_HAND).getItem()) instanceof BigCannonMunitionBlock;
     }
 
     private void placeBlock()
@@ -145,9 +147,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         player.setXRot(direction == Direction.UP ? -90 : direction == Direction.DOWN ? 90 : 0);
         player.setYRot(direction.toYRot());
 
-
-        activateInner(player, center, clickedPos, movementVector, inventory.getStackInSlot(0));
-
+        activateInner(player, center, clickedPos, movementVector, player.getItemInHand(InteractionHand.MAIN_HAND));
     }
 
     private static void activateInner(AmmoDeployerFakePlayer player, Vec3 vec, BlockPos clickedPos, Vec3 extensionVector, ItemStack invStack) {
@@ -183,7 +183,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     }
 
 
-    //WIP
+    //WIP might not be needed?
     private boolean canPlaceBlock() {
         return true;
     }
@@ -193,7 +193,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
     @Override
     public void clearContent() {
-        inventory.clear();
+
     }
 
     public void discardPlayer() {
@@ -241,6 +241,8 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         }
         //invHandler = createHandler();
     }
+
+
 
 
 

@@ -3,6 +3,8 @@ package uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer;
 
 import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
+import net.createmod.catnip.placement.IPlacementHelper;
+import net.createmod.catnip.placement.PlacementHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -11,6 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -89,6 +92,37 @@ public class AmmoDeployerBlock extends DirectionalAxisKineticBlock implements IB
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         if(level.getBlockEntity(pos) instanceof AmmoDeployerBlockEntity ammoDeployerBlockEntity) {
+
+            ItemStack heldByPlayer = stack.copy();
+
+            /*
+            IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
+            if (!player.isShiftKeyDown() && player.mayBuild()) {
+                if (placementHelper.matchesItem(heldByPlayer) && placementHelper.getOffset(player, level, state, pos, hitResult)
+                        .placeInWorld(level, (BlockItem) heldByPlayer.getItem(), player, hand, hitResult)
+                        .consumesAction())
+                    return ItemInteractionResult.SUCCESS;
+            }
+
+             */
+
+            if (level.isClientSide)
+                return ItemInteractionResult.SUCCESS;
+
+            withBlockEntityDo(level, pos, be -> {
+                ItemStack heldByDeployer = be.player.getMainHandItem()
+                        .copy();
+                if (heldByDeployer.isEmpty() && heldByPlayer.isEmpty())
+                    return;
+
+                player.setItemInHand(hand, heldByDeployer);
+                be.player.setItemInHand(InteractionHand.MAIN_HAND, heldByPlayer);
+                be.notifyUpdate();
+            });
+
+            return ItemInteractionResult.SUCCESS;
+
+            /*
             //if the inventory is empty and a stack is in hand, place it in the block
             if(ammoDeployerBlockEntity.inventory.getStackInSlot(0).isEmpty() && !stack.isEmpty()) {
                 ammoDeployerBlockEntity.inventory.setStackInSlot(0, stack.copy());
@@ -102,10 +136,13 @@ public class AmmoDeployerBlock extends DirectionalAxisKineticBlock implements IB
                 ammoDeployerBlockEntity.clearContent();
                 level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
             }
+
+             */
         }
 
         return ItemInteractionResult.SUCCESS;
     }
+
 
 
 }
