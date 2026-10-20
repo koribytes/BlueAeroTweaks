@@ -28,6 +28,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import rbasamoyai.createbigcannons.index.CBCBlocks;
+import rbasamoyai.createbigcannons.munitions.big_cannon.BigCannonMunitionBlock;
+import rbasamoyai.createbigcannons.munitions.big_cannon.propellant.BigCannonPropellantBlock;
 import uk.tfindustries.blueaerotweaks.config.BlueConfig;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
@@ -129,12 +132,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     }
 
     private boolean isWhitelisted() {
-        //temporary hard coded
-        if (inventory.getStackInSlot(0).is(Items.COAL_BLOCK)) {
-            return true;
-        }
-
-        return false;
+        return Block.byItem(inventory.getStackInSlot(0).getItem()) instanceof BigCannonMunitionBlock;
     }
 
     private void placeBlock()
