@@ -10,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.createmod.catnip.math.VecHelper;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.*;
@@ -243,7 +244,54 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     }
 
 
+    @Override
+    public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        compound.putInt("Timer", timer);
+        compound.putBoolean("Powered", redstoneLocked);
+        if (owner != null)
+            compound.putUUID("Owner", owner);
 
+        if (player != null) {
+            ListTag invNBT = new ListTag();
+            player.getInventory()
+                    .save(invNBT);
+            compound.put("Inventory", invNBT);
+            compound.put("HeldItem", player.getMainHandItem().saveOptional(registries));
+            //compound.put("Overflow", NBTHelper.writeItemList(overflowItems, registries));
+        } else if (deferredInventoryList != null) {
+            compound.put("Inventory", deferredInventoryList);
+        }
+
+
+
+        super.write(compound, registries, clientPacket);
+
+        if (!clientPacket)
+            return;
+        if (player == null)
+            return;
+        compound.put("HeldItem", player.getMainHandItem().saveOptional(registries));
+    }
+
+    @Override
+    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        timer = compound.getInt("Timer");
+        redstoneLocked = compound.getBoolean("Powered");
+        if (compound.contains("Owner"))
+            owner = compound.getUUID("Owner");
+
+        deferredInventoryList = compound.getList("Inventory", Tag.TAG_COMPOUND);
+        //overflowItems = NBTHelper.readItemList(compound.getList("Overflow", Tag.TAG_COMPOUND), registries);\
+
+        if (compound.contains("HeldItem")) {
+            heldItem = ItemStack.parseOptional(registries, compound.getCompound("HeldItem"));
+        }
+
+        super.read(compound, registries, clientPacket);
+
+        if (!clientPacket)
+            return;
+    }
 
 
 }
