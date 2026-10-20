@@ -51,6 +51,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     private IItemHandlerModifiable invHandler;
     private ListTag deferredInventoryList;
     Direction placementSetting;
+    int distanceSetting;
 
     AmmoDeployerFakePlayer player;
 
@@ -60,10 +61,12 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //inventory = new ProcessingInventory(this::start).withSlotLimit(false);
         timer = -1;
         redstoneLocked = false;
-        //temp hardcoded 10sec
+        //temp hardcoded default 10sec
         cooldownMax = 200;
+        //temp hardcoded default 1
+        distanceSetting = 2;
         //defaults to the same facing as the block
-        placementSetting = getBlockState().getValue(FACING);
+        placementSetting = Direction.DOWN;
 
     }
 
@@ -144,7 +147,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         Vec3 movementVector = getMovementVector();
         Direction direction = getBlockState().getValue(FACING);
         Vec3 center = VecHelper.getCenterOf(worldPosition);
-        BlockPos clickedPos = worldPosition.relative(direction, 2);
+        BlockPos clickedPos = worldPosition.relative(direction, distanceSetting);
         player.setXRot(direction == Direction.UP ? -90 : direction == Direction.DOWN ? 90 : 0);
         player.setYRot(direction.toYRot());
 
@@ -170,7 +173,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
                 new ClipContext(rayOrigin, rayTarget, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player);
         BlockHitResult result = level.clip(rayTraceContext);
         if (result.getBlockPos() != clickedPos)
-            result = new BlockHitResult(result.getLocation(), result.getDirection(), clickedPos, result.isInside());
+            result = new BlockHitResult(result.getLocation(), player.getNearestViewDirection(), clickedPos, result.isInside());
         BlockState clickedState = level.getBlockState(clickedPos);
         Direction face = result.getDirection();
         if (face == null)
@@ -247,6 +250,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     @Override
     public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         compound.putInt("Timer", timer);
+        compound.putInt("DistanceSetting", distanceSetting);
         compound.putBoolean("Powered", redstoneLocked);
         if (owner != null)
             compound.putUUID("Owner", owner);
@@ -276,6 +280,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     @Override
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         timer = compound.getInt("Timer");
+        distanceSetting = compound.getInt("DistanceSetting");
         redstoneLocked = compound.getBoolean("Powered");
         if (compound.contains("Owner"))
             owner = compound.getUUID("Owner");
