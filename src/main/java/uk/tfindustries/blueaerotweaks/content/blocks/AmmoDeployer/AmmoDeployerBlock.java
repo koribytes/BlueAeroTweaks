@@ -121,23 +121,6 @@ public class AmmoDeployerBlock extends DirectionalAxisKineticBlock implements IB
             });
 
             return ItemInteractionResult.SUCCESS;
-
-            /*
-            //if the inventory is empty and a stack is in hand, place it in the block
-            if(ammoDeployerBlockEntity.inventory.getStackInSlot(0).isEmpty() && !stack.isEmpty()) {
-                ammoDeployerBlockEntity.inventory.setStackInSlot(0, stack.copy());
-                stack.shrink(64);
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-            }
-            //if the hand is empty, grab the items inside
-            else if(stack.isEmpty()) {
-                ItemStack stackOnAmmoDeployer = ammoDeployerBlockEntity.inventory.getStackInSlot(0);
-                player.setItemInHand(InteractionHand.MAIN_HAND, stackOnAmmoDeployer);
-                ammoDeployerBlockEntity.clearContent();
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
-            }
-
-             */
         }
 
         return ItemInteractionResult.SUCCESS;
