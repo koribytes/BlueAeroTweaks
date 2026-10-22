@@ -50,7 +50,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     protected ItemStack heldItem;
     private IItemHandlerModifiable invHandler;
     private ListTag deferredInventoryList;
-    Direction placementSetting;
+    int placementSetting;
     int distanceSetting;
 
     AmmoDeployerFakePlayer player;
@@ -66,8 +66,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //temp hardcoded default 1
         distanceSetting = 2;
         //defaults to the same facing as the block
-        placementSetting = Direction.DOWN;
-
+        placementSetting = 0;
     }
 
 
@@ -154,7 +153,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         activateInner(player, center, clickedPos, movementVector, player.getItemInHand(InteractionHand.MAIN_HAND));
     }
 
-    private static void activateInner(AmmoDeployerFakePlayer player, Vec3 vec, BlockPos clickedPos, Vec3 extensionVector, ItemStack invStack) {
+    private void activateInner(AmmoDeployerFakePlayer player, Vec3 vec, BlockPos clickedPos, Vec3 extensionVector, ItemStack invStack) {
         //DeployerHandler ActivateInner section
         Vec3 rayOrigin = vec.add(extensionVector.scale(3 / 2f + 1 / 64f));
         Vec3 rayTarget = vec.add(extensionVector.scale(5 / 2f - 1 / 64f));
@@ -176,12 +175,12 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //testing
         Direction test = player.getNearestViewDirection();
         if (test == Direction.SOUTH) {
-            result = new BlockHitResult(result.getLocation(), player.getDirection(), clickedPos, result.isInside());
+            result = new BlockHitResult(result.getLocation(), setPlacementDirection(player.getDirection()), clickedPos, result.isInside());
         }
 
         else {
             if (result.getBlockPos() != clickedPos)
-                result = new BlockHitResult(result.getLocation(), player.getNearestViewDirection(), clickedPos, result.isInside());
+                result = new BlockHitResult(result.getLocation(), setPlacementDirection(player.getNearestViewDirection()), clickedPos, result.isInside());
         }
         BlockState clickedState = level.getBlockState(clickedPos);
         Direction face = result.getDirection();
@@ -199,6 +198,35 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     //WIP might not be needed?
     private boolean canPlaceBlock() {
         return true;
+    }
+
+    private Direction setPlacementDirection(Direction direction) {
+        switch (placementSetting) {
+            case 0:
+                //default nothing
+                break;
+            //opposite
+            case 1:
+                direction = direction.getOpposite();
+                break;
+            //clockwise x
+            case 2:
+                direction = direction.getClockWise(Direction.Axis.X);
+                break;
+            //counterclockwise x
+            case 3:
+                direction = direction.getCounterClockWise(Direction.Axis.X);
+                break;
+            case 4:
+                direction = direction.getClockWise(Direction.Axis.Y);
+                break;
+            case 5:
+                direction = direction.getCounterClockWise(Direction.Axis.Y);
+                break;
+
+        }
+
+        return direction;
     }
 
     private void start(ItemStack itemStack) {
