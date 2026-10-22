@@ -21,6 +21,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.Direction;
@@ -50,8 +51,17 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     protected ItemStack heldItem;
     private IItemHandlerModifiable invHandler;
     private ListTag deferredInventoryList;
-    Direction placementSetting;
     int distanceSetting;
+    TransformSettings placementSetting;
+
+    public enum TransformSettings {
+        DEFAULT,
+        OPPOSITE,
+        UP,
+        DOWN,
+        RIGHT,
+        LEFT;
+    }
 
     AmmoDeployerFakePlayer player;
 
@@ -66,8 +76,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //temp hardcoded default 1
         distanceSetting = 2;
         //defaults to the same facing as the block
-        placementSetting = Direction.DOWN;
-
+        placementSetting = TransformSettings.RIGHT;
     }
 
 
@@ -154,7 +163,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         activateInner(player, center, clickedPos, movementVector, player.getItemInHand(InteractionHand.MAIN_HAND));
     }
 
-    private static void activateInner(AmmoDeployerFakePlayer player, Vec3 vec, BlockPos clickedPos, Vec3 extensionVector, ItemStack invStack) {
+    private void activateInner(AmmoDeployerFakePlayer player, Vec3 vec, BlockPos clickedPos, Vec3 extensionVector, ItemStack invStack) {
         //DeployerHandler ActivateInner section
         Vec3 rayOrigin = vec.add(extensionVector.scale(3 / 2f + 1 / 64f));
         Vec3 rayTarget = vec.add(extensionVector.scale(5 / 2f - 1 / 64f));
@@ -176,12 +185,12 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //testing
         Direction test = player.getNearestViewDirection();
         if (test == Direction.SOUTH) {
-            result = new BlockHitResult(result.getLocation(), player.getDirection(), clickedPos, result.isInside());
+            result = new BlockHitResult(result.getLocation(), calcPlacementDirection(player.getDirection()), clickedPos, result.isInside());
         }
 
         else {
             if (result.getBlockPos() != clickedPos)
-                result = new BlockHitResult(result.getLocation(), player.getNearestViewDirection(), clickedPos, result.isInside());
+                result = new BlockHitResult(result.getLocation(), calcPlacementDirection(player.getNearestViewDirection()), clickedPos, result.isInside());
         }
         BlockState clickedState = level.getBlockState(clickedPos);
         Direction face = result.getDirection();
@@ -199,6 +208,109 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     //WIP might not be needed?
     private boolean canPlaceBlock() {
         return true;
+    }
+
+    private Direction calcPlacementDirection(Direction direction) {
+        switch (placementSetting) {
+            case DEFAULT:
+                //default nothing
+                break;
+            //opposite
+            case OPPOSITE:
+                direction = direction.getOpposite();
+                break;
+            //"right"
+            case RIGHT:
+                direction = rotateRight(direction);
+                break;
+            //"left"
+            case LEFT:
+                direction = rotateLeft(direction);
+                break;
+            //"up"
+            case UP:
+                direction = rotateUP(direction);
+                break;
+            //"down"
+            case DOWN:
+                direction = rotateDOWN(direction);
+                break;
+
+        }
+
+        return direction;
+    }
+
+    private Direction rotateRight (Direction direction) {
+        switch (direction) {
+            case UP:
+                break;
+            case DOWN:
+                break;
+            case NORTH:
+                break;
+            case SOUTH:
+                break;
+            case EAST:
+                break;
+            case WEST:
+                break;
+        }
+        return direction;
+    }
+
+    private Direction rotateLeft (Direction direction) {
+        switch (direction) {
+            case UP:
+                break;
+            case DOWN:
+                break;
+            case NORTH:
+                break;
+            case SOUTH:
+                break;
+            case EAST:
+                break;
+            case WEST:
+                break;
+        }
+        return direction;
+    }
+
+    private Direction rotateUP (Direction direction) {
+        switch (direction) {
+            case UP:
+                break;
+            case DOWN:
+                break;
+            case NORTH:
+                break;
+            case SOUTH:
+                break;
+            case EAST:
+                break;
+            case WEST:
+                break;
+        }
+        return direction;
+    }
+
+    private Direction rotateDOWN (Direction direction) {
+        switch (direction) {
+            case UP:
+                break;
+            case DOWN:
+                break;
+            case NORTH:
+                break;
+            case SOUTH:
+                break;
+            case EAST:
+                break;
+            case WEST:
+                break;
+        }
+        return direction;
     }
 
     private void start(ItemStack itemStack) {
