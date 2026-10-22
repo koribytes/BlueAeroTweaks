@@ -172,8 +172,17 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         ClipContext rayTraceContext =
                 new ClipContext(rayOrigin, rayTarget, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player);
         BlockHitResult result = level.clip(rayTraceContext);
-        if (result.getBlockPos() != clickedPos)
-            result = new BlockHitResult(result.getLocation(), player.getNearestViewDirection(), clickedPos, result.isInside());
+
+        //testing
+        Direction test = player.getNearestViewDirection();
+        if (test == Direction.SOUTH) {
+            result = new BlockHitResult(result.getLocation(), player.getDirection(), clickedPos, result.isInside());
+        }
+
+        else {
+            if (result.getBlockPos() != clickedPos)
+                result = new BlockHitResult(result.getLocation(), player.getNearestViewDirection(), clickedPos, result.isInside());
+        }
         BlockState clickedState = level.getBlockState(clickedPos);
         Direction face = result.getDirection();
         if (face == null)
