@@ -21,7 +21,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.Direction;
@@ -51,19 +50,19 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     protected ItemStack heldItem;
     private IItemHandlerModifiable invHandler;
     private ListTag deferredInventoryList;
+    TransformationSettings placementSetting;
     int distanceSetting;
-    TransformSettings placementSetting;
-
-    public enum TransformSettings {
-        DEFAULT,
-        OPPOSITE,
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT;
-    }
 
     AmmoDeployerFakePlayer player;
+
+    public enum TransformationSettings {
+        FORE,
+        BACK,
+        RIGHT,
+        LEFT,
+        UP,
+        DOWN;
+    }
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
@@ -76,7 +75,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //temp hardcoded default 1
         distanceSetting = 2;
         //defaults to the same facing as the block
-        placementSetting = TransformSettings.RIGHT;
+        placementSetting = TransformationSettings.RIGHT;
     }
 
 
@@ -212,28 +211,26 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
     private Direction calcPlacementDirection(Direction direction) {
         switch (placementSetting) {
-            case DEFAULT:
+            case FORE:
                 //default nothing
                 break;
             //opposite
-            case OPPOSITE:
+            case BACK:
                 direction = direction.getOpposite();
                 break;
-            //"right"
+            //clockwise x
             case RIGHT:
                 direction = rotateRight(direction);
                 break;
-            //"left"
+            //counterclockwise x
             case LEFT:
                 direction = rotateLeft(direction);
                 break;
-            //"up"
             case UP:
-                direction = rotateUP(direction);
+                direction = rotateUp(direction);
                 break;
-            //"down"
             case DOWN:
-                direction = rotateDOWN(direction);
+                direction = rotateDown(direction);
                 break;
 
         }
@@ -241,76 +238,30 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         return direction;
     }
 
-    private Direction rotateRight (Direction direction) {
+    private Direction rotateRight(Direction direction) {
         switch (direction) {
+            case NORTH, SOUTH, EAST, WEST:
+                direction = direction.getClockWise(Direction.Axis.Y);
+                break;
             case UP:
                 break;
             case DOWN:
                 break;
-            case NORTH:
-                break;
-            case SOUTH:
-                break;
-            case EAST:
-                break;
-            case WEST:
-                break;
         }
+
         return direction;
     }
 
-    private Direction rotateLeft (Direction direction) {
-        switch (direction) {
-            case UP:
-                break;
-            case DOWN:
-                break;
-            case NORTH:
-                break;
-            case SOUTH:
-                break;
-            case EAST:
-                break;
-            case WEST:
-                break;
-        }
+    private Direction rotateLeft(Direction direction) {
+        return rotateRight(direction).getOpposite();
+    }
+
+    private Direction rotateUp(Direction direction) {
         return direction;
     }
 
-    private Direction rotateUP (Direction direction) {
-        switch (direction) {
-            case UP:
-                break;
-            case DOWN:
-                break;
-            case NORTH:
-                break;
-            case SOUTH:
-                break;
-            case EAST:
-                break;
-            case WEST:
-                break;
-        }
-        return direction;
-    }
-
-    private Direction rotateDOWN (Direction direction) {
-        switch (direction) {
-            case UP:
-                break;
-            case DOWN:
-                break;
-            case NORTH:
-                break;
-            case SOUTH:
-                break;
-            case EAST:
-                break;
-            case WEST:
-                break;
-        }
-        return direction;
+    private Direction rotateDown(Direction direction) {
+        return rotateUp(direction).getOpposite();
     }
 
     private void start(ItemStack itemStack) {
