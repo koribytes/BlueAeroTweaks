@@ -50,10 +50,19 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     protected ItemStack heldItem;
     private IItemHandlerModifiable invHandler;
     private ListTag deferredInventoryList;
-    int placementSetting;
+    TransformationSettings placementSetting;
     int distanceSetting;
 
     AmmoDeployerFakePlayer player;
+
+    public enum TransformationSettings {
+        FORE,
+        BACK,
+        RIGHT,
+        LEFT,
+        UP,
+        DOWN;
+    }
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
@@ -66,7 +75,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //temp hardcoded default 1
         distanceSetting = 2;
         //defaults to the same facing as the block
-        placementSetting = 0;
+        placementSetting = TransformationSettings.RIGHT;
     }
 
 
@@ -175,12 +184,12 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         //testing
         Direction test = player.getNearestViewDirection();
         if (test == Direction.SOUTH) {
-            result = new BlockHitResult(result.getLocation(), setPlacementDirection(player.getDirection()), clickedPos, result.isInside());
+            result = new BlockHitResult(result.getLocation(), calcPlacementDirection(player.getDirection()), clickedPos, result.isInside());
         }
 
         else {
             if (result.getBlockPos() != clickedPos)
-                result = new BlockHitResult(result.getLocation(), setPlacementDirection(player.getNearestViewDirection()), clickedPos, result.isInside());
+                result = new BlockHitResult(result.getLocation(), calcPlacementDirection(player.getNearestViewDirection()), clickedPos, result.isInside());
         }
         BlockState clickedState = level.getBlockState(clickedPos);
         Direction face = result.getDirection();
@@ -200,33 +209,59 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         return true;
     }
 
-    private Direction setPlacementDirection(Direction direction) {
+    private Direction calcPlacementDirection(Direction direction) {
         switch (placementSetting) {
-            case 0:
+            case FORE:
                 //default nothing
                 break;
             //opposite
-            case 1:
+            case BACK:
                 direction = direction.getOpposite();
                 break;
             //clockwise x
-            case 2:
-                direction = direction.getClockWise(Direction.Axis.X);
+            case RIGHT:
+                direction = rotateRight(direction);
                 break;
             //counterclockwise x
-            case 3:
-                direction = direction.getCounterClockWise(Direction.Axis.X);
+            case LEFT:
+                direction = rotateLeft(direction);
                 break;
-            case 4:
-                direction = direction.getClockWise(Direction.Axis.Y);
+            case UP:
+                direction = rotateUp(direction);
                 break;
-            case 5:
-                direction = direction.getCounterClockWise(Direction.Axis.Y);
+            case DOWN:
+                direction = rotateDown(direction);
                 break;
 
         }
 
         return direction;
+    }
+
+    private Direction rotateRight(Direction direction) {
+        switch (direction) {
+            case NORTH, SOUTH, EAST, WEST:
+                direction = direction.getClockWise(Direction.Axis.Y);
+                break;
+            case UP:
+                break;
+            case DOWN:
+                break;
+        }
+
+        return direction;
+    }
+
+    private Direction rotateLeft(Direction direction) {
+        return rotateRight(direction).getOpposite();
+    }
+
+    private Direction rotateUp(Direction direction) {
+        return direction;
+    }
+
+    private Direction rotateDown(Direction direction) {
+        return rotateUp(direction).getOpposite();
     }
 
     private void start(ItemStack itemStack) {
