@@ -224,7 +224,6 @@ public class HorizontalAmmoDeployerBlockEntity extends KineticBlockEntity implem
                 direction = direction.getClockWise(Direction.Axis.Y);
                 break;
         }
-
         return direction;
     }
 
@@ -233,6 +232,20 @@ public class HorizontalAmmoDeployerBlockEntity extends KineticBlockEntity implem
     }
 
     private Direction rotateUp(Direction direction) {
+        switch (direction) {
+            case NORTH:
+                direction = direction.getCounterClockWise(Direction.Axis.Z);
+                break;
+            case SOUTH:
+                direction = direction.getClockWise(Direction.Axis.Z);
+                break;
+            case EAST:
+                direction = direction.getCounterClockWise(Direction.Axis.X);
+                break;
+            case WEST:
+                direction = direction.getClockWise(Direction.Axis.X);
+                break;
+        }
         return direction;
     }
 
