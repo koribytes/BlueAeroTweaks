@@ -66,8 +66,6 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
     public AmmoDeployerBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlueBlockEntityTypes.AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, blockState);
-        //temporarily hard coding the withSlotLimit method
-        //inventory = new ProcessingInventory(this::start).withSlotLimit(false);
         timer = -1;
         redstoneLocked = false;
         //temp hardcoded default 10sec
