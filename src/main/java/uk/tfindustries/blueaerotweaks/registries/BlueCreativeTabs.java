@@ -32,6 +32,7 @@ public class BlueCreativeTabs {
                         output.accept(BlueBlocks.AIR_FRYER_BLOCK);
                         output.accept(BlueBlocks.SQUALLSTONE_BLOCK);
                         output.accept(BlueBlocks.AMMO_DEPLOYER_BLOCK);
+                        output.accept(BlueBlocks.HORIZONTAL_AMMO_DEPLOYER_BLOCK);
 
                         output.accept(BlueBlocks.JAPANESE_CEDAR_WOOD);
                         output.accept(BlueBlocks.STRIPPED_JAPANESE_CEDAR_WOOD);

@@ -7,6 +7,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import uk.tfindustries.blueaerotweaks.BlueAeroTweaks;
 import uk.tfindustries.blueaerotweaks.content.blocks.AirFryer.AirFryerBlockEntity;
 import uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer.AmmoDeployerBlockEntity;
+import uk.tfindustries.blueaerotweaks.content.blocks.HorizontalAmmoDeployer.HorizontalAmmoDeployerBlock;
+import uk.tfindustries.blueaerotweaks.content.blocks.HorizontalAmmoDeployer.HorizontalAmmoDeployerBlockEntity;
 
 import java.util.function.Supplier;
 
@@ -39,6 +41,20 @@ public final class BlueBlockEntityTypes {
                             // A vararg of blocks that can have this block entity.
                             // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                             BlueBlocks.AMMO_DEPLOYER_BLOCK.get()
+                    )
+                    // Build using null; vanilla does some datafixer shenanigans with the parameter that we don't need.
+                    .build(null)
+    );
+
+    public static final Supplier<BlockEntityType<HorizontalAmmoDeployerBlockEntity>> HORIZONTAL_AMMO_DEPLOYER_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
+            "horizontal_ammo_deployer_block_entity",
+            // The block entity type, created using a builder.
+            () -> BlockEntityType.Builder.of(
+                            // The supplier to use for constructing the block entity instances.
+                            HorizontalAmmoDeployerBlockEntity::new,
+                            // A vararg of blocks that can have this block entity.
+                            // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
+                            BlueBlocks.HORIZONTAL_AMMO_DEPLOYER_BLOCK.get()
                     )
                     // Build using null; vanilla does some datafixer shenanigans with the parameter that we don't need.
                     .build(null)
