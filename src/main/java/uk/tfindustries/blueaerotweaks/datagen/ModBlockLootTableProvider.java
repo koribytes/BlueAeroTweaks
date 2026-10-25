@@ -22,6 +22,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(BlueBlocks.SQUALLSTONE_BLOCK.get());
         dropSelf(BlueBlocks.AIR_FRYER_BLOCK.get());
         dropSelf(BlueBlocks.AMMO_DEPLOYER_BLOCK.get());
+        dropSelf(BlueBlocks.HORIZONTAL_AMMO_DEPLOYER_BLOCK.get());
 
 
         dropSelf(BlueBlocks.JAPANESE_CEDAR_LOG.get());

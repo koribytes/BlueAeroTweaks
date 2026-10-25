@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "blueaerotweaks:block/horizontal_ammo_deployer_block",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "blueaerotweaks:block/horizontal_ammo_deployer_block"
+    },
+    "facing=south": {
+      "model": "blueaerotweaks:block/horizontal_ammo_deployer_block",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "blueaerotweaks:block/horizontal_ammo_deployer_block",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

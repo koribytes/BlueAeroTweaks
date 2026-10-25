@@ -3,12 +3,8 @@ package uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer;
 
 import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.placement.IPlacementHelper;
-import net.createmod.catnip.placement.PlacementHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -94,17 +90,6 @@ public class AmmoDeployerBlock extends DirectionalAxisKineticBlock implements IB
         if(level.getBlockEntity(pos) instanceof AmmoDeployerBlockEntity ammoDeployerBlockEntity) {
 
             ItemStack heldByPlayer = stack.copy();
-
-            /*
-            IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
-            if (!player.isShiftKeyDown() && player.mayBuild()) {
-                if (placementHelper.matchesItem(heldByPlayer) && placementHelper.getOffset(player, level, state, pos, hitResult)
-                        .placeInWorld(level, (BlockItem) heldByPlayer.getItem(), player, hand, hitResult)
-                        .consumesAction())
-                    return ItemInteractionResult.SUCCESS;
-            }
-
-             */
 
             if (level.isClientSide)
                 return ItemInteractionResult.SUCCESS;

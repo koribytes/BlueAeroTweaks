@@ -65,6 +65,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //customLamp(BlueBlocks.JAPANESE_CEDAR_LAMP);
         customLamp();
         airFryerProvider();
+        horizontalAmmoDeployerProvider();
         ammoDeployerProvider(($, vertical) -> this.models()
                 .getExistingFile(this.modLoc("block/ammo_deployer_block" + "_" + (vertical ? "vertical" : "horizontal"))));
     }
@@ -113,6 +114,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         });
     }
 
+
     private void ammoDeployerProvider(BiFunction<BlockState, Boolean, ModelFile> modelFunc) {
         this.getVariantBuilder(BlueBlocks.AMMO_DEPLOYER_BLOCK.get()).forAllStates(blockState -> {
             boolean alongFirst = blockState.getValue(DirectionalAxisKineticBlock.AXIS_ALONG_FIRST_COORDINATE);
@@ -126,6 +128,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .modelFile(modelFunc.apply(blockState, vertical))
                     .rotationX(xRot)
                     .rotationY(yRot)
+                    .build();
+        });
+    }
+
+    private void horizontalAmmoDeployerProvider() {
+        this.getVariantBuilder(BlueBlocks.HORIZONTAL_AMMO_DEPLOYER_BLOCK.get()).forAllStates(blockState -> {
+            final int yRot = ((int)
+                    blockState.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360;
+            return ConfiguredModel.builder()
+                    .modelFile(this.models().getExistingFile(this.modLoc("block/horizontal_ammo_deployer_block")))
+                    .rotationY(yRot)
+                    .uvLock(yRot != 0)
                     .build();
         });
     }

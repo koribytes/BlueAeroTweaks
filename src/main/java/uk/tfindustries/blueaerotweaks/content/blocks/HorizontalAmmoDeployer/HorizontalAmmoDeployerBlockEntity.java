@@ -54,7 +54,7 @@ public class HorizontalAmmoDeployerBlockEntity extends KineticBlockEntity implem
         //temp hardcoded default 1
         distanceSetting = 2;
         //defaults to the same facing as the block
-        placementSetting = AmmoDeployerBlockEntity.TransformationSettings.RIGHT;
+        placementSetting = AmmoDeployerBlockEntity.TransformationSettings.LEFT;
     }
 
     @Override
@@ -234,16 +234,16 @@ public class HorizontalAmmoDeployerBlockEntity extends KineticBlockEntity implem
     private Direction rotateUp(Direction direction) {
         switch (direction) {
             case NORTH:
-                direction = direction.getCounterClockWise(Direction.Axis.Z);
-                break;
-            case SOUTH:
-                direction = direction.getClockWise(Direction.Axis.Z);
-                break;
-            case EAST:
                 direction = direction.getCounterClockWise(Direction.Axis.X);
                 break;
-            case WEST:
+            case SOUTH:
                 direction = direction.getClockWise(Direction.Axis.X);
+                break;
+            case EAST:
+                direction = direction.getCounterClockWise(Direction.Axis.Z);
+                break;
+            case WEST:
+                direction = direction.getClockWise(Direction.Axis.Z);
                 break;
         }
         return direction;
