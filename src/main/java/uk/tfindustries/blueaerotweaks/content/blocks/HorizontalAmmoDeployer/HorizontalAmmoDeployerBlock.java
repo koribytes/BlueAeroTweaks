@@ -1,5 +1,6 @@
 package uk.tfindustries.blueaerotweaks.content.blocks.HorizontalAmmoDeployer;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer.AmmoDeployerBlockEntity;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 
@@ -94,26 +96,32 @@ public class HorizontalAmmoDeployerBlock extends HorizontalKineticBlock implemen
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if(level.getBlockEntity(pos) instanceof HorizontalAmmoDeployerBlockEntity horizontalAmmoDeployerBlockEntity) {
+        ItemStack heldByPlayer = stack.copy();
 
-            ItemStack heldByPlayer = stack.copy();
+        if (AllItems.WRENCH.isIn(heldByPlayer))
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
-            if (level.isClientSide)
-                return ItemInteractionResult.SUCCESS;
-
-            withBlockEntityDo(level, pos, be -> {
-                ItemStack heldByDeployer = be.player.getMainHandItem()
-                        .copy();
-                if (heldByDeployer.isEmpty() && heldByPlayer.isEmpty())
-                    return;
-
-                player.setItemInHand(hand, heldByDeployer);
-                be.player.setItemInHand(InteractionHand.MAIN_HAND, heldByPlayer);
-                be.notifyUpdate();
-            });
-
+        Vec3 normal = Vec3.atLowerCornerOf(state.getValue(HORIZONTAL_FACING)
+                .getNormal());
+        Vec3 location = hitResult.getLocation()
+                .subtract(Vec3.atCenterOf(pos)
+                        .subtract(normal.scale(.5)))
+                .multiply(normal);
+        if (location.length() < .75f)
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (level.isClientSide)
             return ItemInteractionResult.SUCCESS;
-        }
+
+        withBlockEntityDo(level, pos, be -> {
+            ItemStack heldByDeployer = be.player.getMainHandItem()
+                    .copy();
+            if (heldByDeployer.isEmpty() && heldByPlayer.isEmpty())
+                return;
+
+            player.setItemInHand(hand, heldByDeployer);
+            be.player.setItemInHand(InteractionHand.MAIN_HAND, heldByPlayer);
+            be.notifyUpdate();
+        });
 
         return ItemInteractionResult.SUCCESS;
     }
