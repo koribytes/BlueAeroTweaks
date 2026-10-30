@@ -5,6 +5,7 @@ import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 import com.simibubi.create.content.kinetics.deployer.DeployerItemHandler;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -33,10 +34,12 @@ import rbasamoyai.createbigcannons.index.CBCBlocks;
 import rbasamoyai.createbigcannons.munitions.big_cannon.BigCannonMunitionBlock;
 import rbasamoyai.createbigcannons.munitions.big_cannon.propellant.BigCannonPropellantBlock;
 import uk.tfindustries.blueaerotweaks.config.BlueConfig;
+import uk.tfindustries.blueaerotweaks.content.blocks.HorizontalAmmoDeployer.HorizontalAmmoDeployerFilterSlot;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
 import uk.tfindustries.blueaerotweaks.registries.BlueItems;
 
+import java.util.List;
 import java.util.UUID;
 
 import static uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer.AmmoDeployerBlock.FACING;
@@ -54,6 +57,8 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
     int distanceSetting;
 
     AmmoDeployerFakePlayer player;
+
+    protected FilteringBehaviour filtering;
 
     public enum TransformationSettings {
         FORE,
@@ -89,6 +94,13 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
         Containers.dropContents(this.level, this.worldPosition, inv);
 
          */
+    }
+
+    @Override
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        super.addBehaviours(behaviours);
+        filtering = new FilteringBehaviour(this, new AmmoDeployerFilterSlot());
+        behaviours.add(filtering);
     }
 
 
@@ -267,7 +279,7 @@ public class AmmoDeployerBlockEntity extends KineticBlockEntity implements Clear
 
     @Override
     public void clearContent() {
-
+        filtering.setFilter(ItemStack.EMPTY);
     }
 
     public void discardPlayer() {

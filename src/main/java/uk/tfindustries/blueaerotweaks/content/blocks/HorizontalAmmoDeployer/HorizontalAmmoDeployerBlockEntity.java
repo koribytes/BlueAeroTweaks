@@ -1,6 +1,9 @@
 package uk.tfindustries.blueaerotweaks.content.blocks.HorizontalAmmoDeployer;
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.kinetics.deployer.DeployerFilterSlot;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,6 +29,7 @@ import uk.tfindustries.blueaerotweaks.content.blocks.AmmoDeployer.AmmoDeployerFa
 import uk.tfindustries.blueaerotweaks.registries.BlueBlockEntityTypes;
 import uk.tfindustries.blueaerotweaks.registries.BlueBlocks;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
@@ -44,6 +48,7 @@ public class HorizontalAmmoDeployerBlockEntity extends KineticBlockEntity implem
     int distanceSetting;
 
     AmmoDeployerFakePlayer player;
+    protected FilteringBehaviour filtering;
 
     public HorizontalAmmoDeployerBlockEntity(BlockPos pos, BlockState state) {
         super(BlueBlockEntityTypes.HORIZONTAL_AMMO_DEPLOYER_BLOCK_ENTITY.get(), pos, state);
@@ -59,7 +64,7 @@ public class HorizontalAmmoDeployerBlockEntity extends KineticBlockEntity implem
 
     @Override
     public void clearContent() {
-
+        filtering.setFilter(ItemStack.EMPTY);
     }
 
     public void drops() {
@@ -72,6 +77,13 @@ public class HorizontalAmmoDeployerBlockEntity extends KineticBlockEntity implem
         Containers.dropContents(this.level, this.worldPosition, inv);
 
          */
+    }
+
+    @Override
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        super.addBehaviours(behaviours);
+        filtering = new FilteringBehaviour(this, new HorizontalAmmoDeployerFilterSlot());
+        behaviours.add(filtering);
     }
 
 
